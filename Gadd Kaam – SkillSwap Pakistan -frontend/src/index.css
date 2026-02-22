@@ -1,0 +1,12 @@
+/* src/index.css */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+  font-family: 'Inter', sans-serif; /* Your chosen font */
+  background-color: rgb(245, 245, 220); /* Your chosen background color */
+  color: rgb(50, 50, 50); /* A dark grey for general text readability */
+}
+
+/* Add the Inter font import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');

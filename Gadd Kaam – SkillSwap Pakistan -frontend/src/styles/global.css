@@ -1,0 +1,636 @@
+/* src/styles/global.css */
+
+:root {
+  /* Light Mode Variables */
+  --primary-orange: #e38b40; /* Main accent color */
+  --primary-hover-light: #f5e4d7; /* Lighter shade for subtle hover/backgrounds */
+  --text-dark: #333; /* Main text color for dark text on light backgrounds */
+  --text-medium: #666; /* Secondary text, descriptions, slightly muted */
+  --text-light: #999; /* Faded text, placeholders, very subtle */
+  --background-page: #f9f7f4; /* Overall page background */
+  --background-section: #f0f0f0; /* Background for distinct sections or elements (e.g., skill card image wrapper) */
+  --card-background: #fff; /* White background for cards and prominent panels */
+  --input-background: #fff; /* Input field background */
+  --border-color: #e0e0e0; /* General border color for elements */
+  --border-color-light: #f0f0f0; /* Lighter border for subtle lines or divisions */
+  --button-primary-bg: #e38b40; /* Primary button background */
+  --button-primary-text: #fff; /* Primary button text color */
+  --button-primary-hover-bg: #cc7a36; /* Primary button hover background */
+  --button-secondary-bg: #f5f5f5; /* Secondary button background */
+  --button-secondary-text: #e38b40; /* Secondary button text color */
+  --button-secondary-hover-bg: #e38b40; /* Secondary button hover background */
+  --button-secondary-hover-text: #fff; /* Secondary button hover text color */
+  --button-danger-bg: #dc3545; /* Danger button background (e.g., delete) */
+  --button-danger-hover-bg: #c9302c; /* Danger button hover background */
+  --success-color: #28a745; /* Success message/indicator color */
+  --success-light-bg: #d4edda; /* Light background for success banners */
+  --error-color: #dc3545; /* Error message/indicator color */
+  --error-light-bg: #f8d7da; /* Light background for error banners */
+  --warning-color: #ffc107; /* Warning/pending color (e.g., for "confirmation pending") */
+  --warning-light-bg: #fff3cd; /* Light background for warning banners */
+  --info-color: #17a2b8; /* Info message/indicator color */
+  --info-light-bg: #d1ecf1; /* Light background for info banners */
+  --star-filled-color: #f5c242; /* Color for filled stars in ratings */
+  --star-empty-color: #e0e0e0; /* Color for empty stars in ratings */
+  --tag-background: #e0e0e0; /* Background for skill tags, endorsement tags */
+  --tag-text-color: #555; /* Text color for tags */
+  --navbar-background: var(--background-page); /* Navbar background matches page */
+  --top-bar-bg: #f2f2f2; /* Top bar background color */
+  --icon-color: #666; /* Default icon color */
+  --primary-orange-rgb: 227, 139, 64; /* RGB values for primary orange, used in rgba() */
+  --light-blue-review-border: #bbdefb; /* Specific light blue for review profile pic border */
+
+  /* Max content width for consistency */
+  --max-content-width: 1280px;
+  /* Navbar height variable for sticky positioning */
+  --navbar-height: 80px;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+  --text-dark: #e0e0e0; /* Main text color in dark mode */
+  --text-medium: #b0b0b0; /* Secondary text in dark mode */
+  --text-light: #777; /* Faded text in dark mode */
+  --background-page: #121212; /* Overall dark background */
+  --background-section: #1e1e1e; /* Darker section background, for sidebar, etc. */
+  --card-background: #282828; /* Dark card background */
+  --input-background: #333333; /* Dark input field background */
+  --border-color: #444444; /* Darker border color */
+  --border-color-light: #3a3a3a; /* Lighter dark border for subtle lines */
+  --button-primary-bg: #e38b40; /* Keep orange consistent */
+  --button-primary-hover-bg: #ff9933; /* Lighter orange hover */
+  --button-secondary-bg: #444444; /* Dark secondary button background */
+  --button-secondary-text: #e38b40; /* Orange text on dark secondary button */
+  --button-secondary-hover-bg: #e38b40; /* Orange hover for secondary */
+  --button-secondary-hover-text: #fff;
+  --button-danger-bg: #cc4444; /* Darker red for dark mode */
+  --button-danger-hover-bg: #aa3333;
+  --success-color: #63c563; /* Lighter green for dark mode */
+  --success-light-bg: #1c4a1c; /* Dark background for success banners */
+  --error-color: #ff6b6b; /* Lighter red for dark mode */
+  --error-light-bg: #5e1f1f; /* Dark background for error banners */
+  --warning-color: #ffe082; /* Lighter yellow for dark mode */
+  --warning-light-bg: #4a3c0b; /* Dark background for warning banners */
+  --info-color: #81d4fa; /* Lighter info blue for dark mode */
+  --info-light-bg: #0f4a5c; /* Dark background for info banners */
+  --star-filled-color: #ffd700; /* Gold stays gold */
+  --star-empty-color: #555555; /* Darker grey for empty stars */
+  --tag-background: #444444;
+  --tag-text-color: #dddddd;
+  --navbar-background: #1e1e1e;
+  --top-bar-bg: #1f1f1f;
+  --icon-color: #bbb;
+  --light-blue-review-border: #42a5f5; /* Darker blue for review profile pic border in dark mode */
+}
+
+/* Base styles for the main container */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-page);
+  color: var(--text-dark);
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for dark mode */
+}
+
+/* Base styles for the main container */
+.home-page-container,
+.signup-page-container,
+.login-page-container,
+.dashboard-page-container, /* Added for general page container within dashboard context */
+.marketplace-page, /* Ensures these pages use the global page background */
+.women-only-zone-page,
+.messages-page,
+.received-requests-page,
+.reviews-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure full viewport height */
+  background-color: var(--background-page); /* Apply global page background */
+  color: var(--text-dark); /* Apply global text color */
+}
+
+/* General Button Styles */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  text-decoration: none; /* For react-router-dom Link */
+  display: inline-block; /* Make Link behave like a button */
+  text-align: center; /* Center text if link is wider */
+}
+
+.btn-primary-orange {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border: 1px solid var(--button-primary-bg);
+}
+
+.btn-primary-orange:hover {
+  background-color: var(--button-primary-hover-bg);
+  border-color: var(--button-primary-hover-bg);
+}
+
+.btn-secondary-light {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  border: 1px solid var(--button-secondary-text); /* Border matches text color */
+}
+
+.btn-secondary-light:hover {
+  background-color: var(--button-secondary-hover-bg);
+  color: var(--button-secondary-hover-text);
+  border-color: var(--button-secondary-hover-bg);
+}
+
+.btn-danger { /* New general class for danger buttons */
+  background-color: var(--button-danger-bg);
+  color: #fff;
+  border: 1px solid var(--button-danger-bg);
+}
+
+.btn-danger:hover {
+  background-color: var(--button-danger-hover-bg);
+  border-color: var(--button-danger-hover-bg);
+}
+
+.btn-success { /* New general class for success buttons */
+  background-color: var(--success-color);
+  color: #fff;
+  border: 1px solid var(--success-color);
+}
+
+.btn-success:hover {
+  background-color: #218838; /* A darker green for hover, adjust as needed */
+  border-color: #218838;
+}
+
+/* Section General Styles */
+.section-container {
+  max-width: var(--max-content-width);
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-medium); /* Changed to text-medium */
+  text-align: center;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title-left {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: left;
+  margin-bottom: 0;
+}
+
+/* General Card Styles (for elements like dashboard cards, skill cards, review cards) */
+.card-panel {
+  background-color: var(--card-background);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color); /* Added general border */
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .card-panel {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Darker shadow for dark mode */
+}
+
+/* Input/Textarea base styles */
+.input-field,
+.textarea-field {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  background-color: var(--input-background);
+  color: var(--text-dark);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.input-field::placeholder,
+.textarea-field::placeholder {
+  color: var(--text-light); /* Use light text for placeholders */
+}
+
+.input-field:focus,
+.textarea-field:focus {
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 3px rgba(var(--primary-orange-rgb), 0.2);
+  outline: none;
+}
+
+/* Popup/Modal Overlay (for LogoutConfirmationModal, SuccessMessageModal) */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; /* Ensure it's on top of everything */
+}
+
+/* Popup/Modal Content Box */
+.popup-content {
+  background-color: var(--card-background);
+  padding: 2.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.3s ease-out; /* Simple fade-in animation */
+  color: var(--text-dark); /* Ensure popup text is theme-aware */
+  border: 1px solid var(--border-color); /* Added for consistency */
+}
+
+.popup-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.popup-message {
+  font-size: 1.1rem;
+  color: var(--text-medium); /* Changed to text-medium */
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem; /* Space between buttons */
+}
+
+.popup-btn {
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  min-width: 120px;
+}
+
+/* Animation for popup */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* General Responsive Adjustments (for global elements) */
+@media (min-width: 640px) { /* Small devices, tablets */
+  .btn-primary-orange,
+  .btn-secondary-light {
+    width: auto; /* Remove 100% width on smaller screens */
+  }
+}
+/* src/styles/global.css */
+
+:root {
+  /* Light Mode Variables */
+  --primary-orange: #e38b40;
+  --primary-hover-light: #f5e4d7;
+  --text-dark: #333;
+  --text-medium: #666;
+  --text-light: #999;
+  --background-page: #f9f7f4;
+  --background-section: #f0f0f0;
+  --card-background: #fff;
+  --input-background: #fff;
+  --border-color: #e0e0e0;
+  --border-color-light: #f0f0f0;
+  --button-primary-bg: #e38b40;
+  --button-primary-text: #fff;
+  --button-primary-hover-bg: #cc7a36;
+  --button-secondary-bg: #f5f5f5;
+  --button-secondary-text: #e38b40;
+  --button-secondary-hover-bg: #e38b40;
+  --button-secondary-hover-text: #fff;
+  --button-danger-bg: #dc3545;
+  --button-danger-hover-bg: #c9302c;
+  --success-color: #28a745;
+  --success-light-bg: #d4edda;
+  --error-color: #dc3545;
+  --error-light-bg: #f8d7da;
+  --warning-color: #ffc107;
+  --warning-light-bg: #fff3cd;
+  --info-color: #17a2b8;
+  --info-light-bg: #d1ecf1;
+  --star-filled-color: #f5c242;
+  --star-empty-color: #e0e0e0;
+  --tag-background: #e0e0e0;
+  --tag-text-color: #555;
+  --navbar-background: var(--background-page);
+  --top-bar-bg: #f2f2f2;
+  --icon-color: #666;
+  --primary-orange-rgb: 227, 139, 64;
+  --light-blue-review-border: #bbdefb;
+
+  --max-content-width: 1280px;
+  --navbar-height: 80px;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+  --text-dark: #e0e0e0;
+  --text-medium: #b0b0b0;
+  --text-light: #777;
+  --background-page: #121212;
+  --background-section: #1e1e1e;
+  --card-background: #282828;
+  --input-background: #333333;
+  --border-color: #444444;
+  --border-color-light: #3a3a3a;
+  --button-primary-bg: #e38b40;
+  --button-primary-hover-bg: #ff9933;
+  --button-secondary-bg: #444444;
+  --button-secondary-text: #e38b40;
+  --button-secondary-hover-bg: #e38b40;
+  --button-secondary-hover-text: #fff;
+  --button-danger-bg: #cc4444;
+  --button-danger-hover-bg: #aa3333;
+  --success-color: #63c563;
+  --success-light-bg: #1c4a1c;
+  --error-color: #ff6b6b;
+  --error-light-bg: #5e1f1f;
+  --warning-color: #ffe082;
+  --warning-light-bg: #4a3c0b;
+  --info-color: #81d4fa;
+  --info-light-bg: #0f4a5c;
+  --star-filled-color: #ffd700;
+  --star-empty-color: #555555;
+  --tag-background: #444444;
+  --tag-text-color: #dddddd;
+  --navbar-background: #1e1e1e;
+  --top-bar-bg: #1f1f1f;
+  --icon-color: #bbb;
+  --light-blue-review-border: #42a5f5;
+}
+
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-page);
+  color: var(--text-dark);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Page Containers */
+.home-page-container,
+.signup-page-container,
+.login-page-container,
+.dashboard-page-container,
+.marketplace-page,
+.women-only-zone-page,
+.messages-page,
+.received-requests-page,
+.reviews-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--background-page);
+  color: var(--text-dark);
+}
+
+/* General Button Styles */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  border: none;
+}
+
+.btn-primary-orange {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border: 1px solid var(--button-primary-bg);
+}
+
+.btn-primary-orange:hover {
+  background-color: var(--button-primary-hover-bg);
+  border-color: var(--button-primary-hover-bg);
+}
+
+.btn-secondary-light {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  border: 1px solid var(--button-secondary-text);
+}
+
+.btn-secondary-light:hover {
+  background-color: var(--button-secondary-hover-bg);
+  color: var(--button-secondary-hover-text);
+  border-color: var(--button-secondary-hover-bg);
+}
+
+.btn-danger {
+  background-color: var(--button-danger-bg);
+  color: #fff;
+  border: 1px solid var(--button-danger-bg);
+}
+
+.btn-danger:hover {
+  background-color: var(--button-danger-hover-bg);
+  border-color: var(--button-danger-hover-bg);
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  color: #fff;
+  border: 1px solid var(--success-color);
+}
+
+.btn-success:hover {
+  opacity: 0.9;
+}
+
+/* Section General Styles */
+.section-container {
+  max-width: var(--max-content-width);
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-medium);
+  text-align: center;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title-left {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: left;
+  margin-bottom: 0;
+}
+
+/* General Card Styles */
+.card-panel {
+  background-color: var(--card-background);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .card-panel {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Input/Textarea base styles */
+.input-field,
+.textarea-field {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+  background-color: var(--input-background);
+  color: var(--text-dark);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.input-field::placeholder,
+.textarea-field::placeholder {
+  color: var(--text-light);
+}
+
+.input-field:focus,
+.textarea-field:focus {
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 3px rgba(var(--primary-orange-rgb), 0.2);
+  outline: none;
+}
+
+/* Popup/Modal Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+}
+
+/* Popup/Modal Content Box */
+.popup-content {
+  background-color: var(--card-background);
+  padding: 2.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.3s ease-out;
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+}
+
+.popup-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.popup-message {
+  font-size: 1.1rem;
+  color: var(--text-medium);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.popup-btn {
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  min-width: 120px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* General Responsive Adjustments */
+@media (min-width: 640px) {
+  .btn-primary-orange,
+  .btn-secondary-light {
+    width: auto;
+  }
+}

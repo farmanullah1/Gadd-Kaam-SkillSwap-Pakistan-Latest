@@ -1,0 +1,74 @@
+/* src/styles/WomenOnlyZonePage.css */
+
+.women-only-zone-page {
+  /* Pink-tinted background mesh */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(219, 39, 119, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(219, 39, 119, 0.05) 0px, transparent 50%);
+}
+
+.women-only-zone-header h1 {
+  /* Pink/Purple Gradient for Title */
+  background: linear-gradient(135deg, #db2777, #9333ea); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode .women-only-zone-header h1 {
+  background: linear-gradient(135deg, #f472b6, #a78bfa);
+  -webkit-background-clip: text;
+}
+
+/* Women Only Banner */
+.women-only-banner {
+  background: linear-gradient(135deg, #fce7f3, #fae8ff);
+  color: #831843;
+  padding: 1.2rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 700;
+  border: 1px solid rgba(219, 39, 119, 0.2);
+  box-shadow: 0 4px 15px rgba(219, 39, 119, 0.1);
+}
+
+body.dark-mode .women-only-banner {
+  background: linear-gradient(135deg, #500724, #3b0764);
+  color: #fbcfe8;
+  border-color: #831843;
+}
+
+/* --- BUTTON FIX FOR WOMEN'S ZONE --- */
+.women-only-zone-page .btn-view-details {
+  border-color: #db2777;
+  color: #db2777;
+}
+
+/* Override the slide-in background color to be pink */
+.women-only-zone-page .btn-view-details::before {
+  background: #db2777;
+}
+
+/* Ensure text turns white on hover */
+.women-only-zone-page .btn-view-details:hover {
+  color: #ffffff !important; 
+  box-shadow: 0 5px 15px rgba(219, 39, 119, 0.4);
+}
+
+/* Card Hover Border */
+.women-only-zone-page .skill-card:hover {
+  box-shadow: 
+    0 20px 40px -5px rgba(0, 0, 0, 0.1),
+    0 0 0 2px #db2777; /* Pink glow border */
+}
+
+/* Search Focus Color */
+.women-only-zone-page .search-bar:focus-within {
+  border-color: #db2777;
+  box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.15);
+}
+
+.women-only-zone-page .filter-tag.active {
+  background: linear-gradient(135deg, #db2777, #9333ea);
+  box-shadow: 0 4px 10px rgba(219, 39, 119, 0.3);
+}

@@ -1,0 +1,375 @@
+/* src/styles/offer-skill.css */
+
+/* --- Main Layout Animation --- */
+@keyframes fadeInSlide {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.offer-skill-main {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  min-height: 85vh;
+  animation: fadeInSlide 0.6s ease-out;
+}
+
+.offer-skill-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.offer-skill-header h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--text-dark), var(--primary-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.offer-skill-header p {
+  color: var(--text-medium);
+  font-size: 1.15rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Split Layout Grid --- */
+.offer-skill-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr; /* Form takes slightly more space */
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Responsive: Stack on smaller screens */
+@media (max-width: 1024px) {
+  .offer-skill-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  /* On mobile, put preview first so they see what they are building? 
+     Or keep it bottom. Standard is usually form first. */
+}
+
+/* --- LEFT COLUMN: FORM --- */
+.offer-form-container {
+  background: var(--card-background);
+  padding: 2.5rem;
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+body.dark-mode .offer-form-container {
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.input-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-label svg {
+  color: var(--primary-orange);
+}
+
+/* Inputs & Textareas */
+.offer-form .input-field,
+.offer-form .textarea-field {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 2px solid var(--border-color);
+  background: var(--input-background);
+  color: var(--text-dark);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.offer-form .input-field:focus,
+.offer-form .textarea-field:focus {
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 4px rgba(227, 139, 64, 0.1);
+  outline: none;
+  background: var(--card-background);
+}
+
+.offer-form .textarea-field {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* --- PHOTO UPLOAD AREA --- */
+.upload-section {
+  margin-bottom: 2.5rem;
+}
+
+.image-upload-area {
+  width: 100%;
+  height: 240px;
+  border: 2px dashed var(--border-color);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-section);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.image-upload-area:hover {
+  border-color: var(--primary-orange);
+  background: rgba(227, 139, 64, 0.05);
+}
+
+.image-upload-area.has-image {
+  border-style: solid;
+  border-color: var(--border-color);
+  padding: 0;
+  background: black;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-light);
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.upload-placeholder svg {
+  color: var(--primary-orange);
+  opacity: 0.8;
+}
+
+.preview-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.preview-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  backdrop-filter: blur(4px);
+}
+
+.remove-btn:hover {
+  background: var(--error-color);
+  transform: scale(1.1);
+}
+
+/* --- TOGGLES SECTION --- */
+.toggles-group {
+  background: var(--background-section);
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 2.5rem;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.custom-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.custom-toggle:hover {
+  background: var(--card-background);
+}
+
+.toggle-text {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.toggle-text svg {
+  padding: 8px;
+  background: var(--card-background);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  width: 38px;
+  height: 38px;
+}
+
+.toggle-text div {
+  display: flex;
+  flex-direction: column;
+}
+
+.toggle-text span {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.toggle-text small {
+  color: var(--text-medium);
+  font-size: 0.85rem;
+}
+
+/* Icon Colors */
+.icon-blue { color: #3b82f6; }
+.icon-grey { color: #6b7280; }
+.icon-pink { color: #db2777; }
+
+/* The Switch Slider */
+.custom-toggle input { display: none; }
+
+.slider {
+  width: 50px;
+  height: 28px;
+  background-color: #d1d5db;
+  border-radius: 34px;
+  position: relative;
+  transition: 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.custom-toggle input:checked + .slider {
+  background-color: var(--success-color);
+}
+
+.custom-toggle input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* Submit Button */
+.submit-offer-btn {
+  width: 100%;
+  padding: 18px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 16px;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 10px 25px rgba(227, 139, 64, 0.3);
+}
+
+.submit-offer-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(227, 139, 64, 0.5);
+}
+
+.submit-offer-btn:disabled {
+  background: var(--text-light);
+  transform: none;
+  box-shadow: none;
+}
+
+/* --- RIGHT COLUMN: PREVIEW --- */
+.offer-preview-container {
+  position: sticky;
+  top: 100px; /* Stick to top when scrolling */
+}
+
+.offer-preview-container h3 {
+  font-size: 1.3rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+}
+
+.offer-preview-container p {
+  color: var(--text-medium);
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+}
+
+.preview-card-wrapper {
+  pointer-events: none; /* User can't click links in preview */
+  transform-origin: top center;
+  /* Add a float animation to make it look "live" */
+  animation: floatCard 6s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Reusing Marketplace Card Styles but ensuring they work in preview */
+.preview-mode {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15) !important;
+  border-color: var(--primary-orange) !important;
+}
+
+body.dark-mode .preview-mode {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important;
+}
+
+.error-banner {
+  background: rgba(220, 53, 69, 0.1);
+  color: var(--error-color);
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 600;
+  border: 1px solid var(--error-color);
+}

@@ -1,0 +1,90 @@
+/* src/styles/my-skills.css */
+
+/* Re-using marketplace grid layout */
+.skill-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2.5rem;
+  perspective: 1000px;
+}
+
+/* Header */
+.my-skills-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.my-skills-header h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--text-dark), var(--primary-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.my-skills-header p {
+  color: var(--text-medium);
+  font-size: 1.1rem;
+}
+
+/* Card Actions Specific to My Skills */
+.skill-card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-view-details {
+  flex: 1;
+}
+
+.btn-delete-offer {
+  padding: 12px 16px;
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-delete-offer:hover {
+  background: #dc3545;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* Modal Actions */
+.full-details-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 2rem;
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+}
+
+.full-details-actions .btn-delete-offer {
+  width: auto;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Ensure description truncates neatly on card */
+.skill-card-description {
+  color: var(--text-medium);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

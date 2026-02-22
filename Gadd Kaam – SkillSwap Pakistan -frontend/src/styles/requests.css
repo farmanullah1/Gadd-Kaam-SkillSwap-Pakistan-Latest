@@ -1,0 +1,330 @@
+/* src/styles/requests.css */
+
+.requests-page-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.4rem;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.count-badge {
+  background-color: var(--button-secondary-bg);
+  color: var(--text-medium);
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.request-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+/* --- Request Card Styling --- */
+.request-card {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.request-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.request-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.sender-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.request-profile-pic {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--logo-orange);
+}
+
+.sender-details h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.request-date {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge.remote {
+  background-color: #e0f2fe;
+  color: #0284c7;
+}
+
+.badge.location {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+/* The Exchange Visual Area */
+.request-exchange-visual {
+  background-color: var(--background-section);
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.exchange-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.their-side {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.label-sm {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.skill-highlight {
+  font-weight: 700;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.my-side .skill-highlight {
+  color: var(--logo-orange);
+}
+
+.exchange-icon {
+  background-color: var(--card-background);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-medium);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  margin: 0 10px;
+  font-size: 0.8rem;
+}
+
+/* Message Box */
+.request-message-box {
+  background-color: var(--background-page);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-medium);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  border-left: 3px solid var(--border-color);
+}
+
+/* Actions */
+.request-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.btn-accept {
+  background-color: var(--success-green);
+  color: white;
+  background-color:green;
+
+}
+
+.btn-cancel {
+  background-color: var(--section-background);
+  color: white;
+  border: 1px solid var(--border-color);
+  background-color: rgb(255, 43, 43);
+}
+
+.btn:hover {
+  opacity: 0.8;
+  
+}
+
+
+/* --- Accepted Card (Contact Style) --- */
+.accepted-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.accepted-request-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-background);
+  border: 1px solid var(--success-green);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.accepted-status-line {
+  background-color: #d1fae5; /* Light green */
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #065f46;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #059669;
+  border-radius: 50%;
+}
+
+.accepted-card-content {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+}
+
+.contact-details {
+  flex: 1;
+}
+
+.contact-details h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+}
+
+.contact-details .username {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-medium);
+  margin-bottom: 2px;
+}
+
+.contact-row .icon {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.message-btn {
+  background-color: e38b40;
+  color: white;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+
+/* Empty States */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background-color: var(--background-section);
+  border-radius: 12px;
+  color: var(--text-medium);
+  text-align: center;
+}
+
+.empty-icon {
+  opacity: 0.3;
+  margin-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .accepted-card-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .contact-row {
+    justify-content: center;
+  }
+  .message-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,539 @@
+/* src/styles/notifications.css */
+
+/* --- 1. Main Dropdown Container (Glassmorphism & Responsive) --- */
+.notification-dropdown {
+  position: absolute;
+  top: 160%; /* Spacing below the bell icon */
+  right: -80px; /* Default for desktop: shift slightly left to center under bell if needed, or align right */
+  
+  /* FIXED WIDTH FOR DESKTOP */
+  width: 380px;
+  
+  /* RESPONSIVE SAFETY: Never exceed screen width */
+  max-width: 90vw; 
+  
+  /* Glass Effect */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0,0,0,0.05);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  
+  /* Entrance Animation */
+  animation: dropdownEntrance 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  transform-origin: top right;
+}
+
+/* RESPONSIVE MEDIA QUERY FOR MOBILE */
+@media (max-width: 480px) {
+  .notification-dropdown {
+    right: -70px; /* Shift it left so it doesn't overflow right edge */
+    width: 320px; /* Slightly narrower for small screens */
+    top: 180%;
+  }
+  
+  /* Adjust arrow position for mobile if the box shifts */
+  .notification-dropdown::before {
+    right: 90px; /* Move arrow to stay under the bell icon */
+  }
+}
+
+/* Dark Mode */
+body.dark-mode .notification-dropdown {
+  background: rgba(30, 30, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes dropdownEntrance {
+  0% { opacity: 0; transform: translateY(-10px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- 2. Arrow Tip (Aligned with Bell) --- */
+.notification-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 92px; /* This aligns with the bell icon when right: -80px is set on parent */
+  width: 16px;
+  height: 16px;
+  background: white; /* Matches header bg */
+  transform: rotate(45deg);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  z-index: 2001;
+}
+
+body.dark-mode .notification-dropdown::before {
+  background: #2d3035; /* Match header color in dark mode */
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- 3. Header Styling --- */
+.notif-header {
+  padding: 16px 20px;
+  background: linear-gradient(to right, #f9fafb, #fff);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2002; /* Above arrow */
+}
+
+body.dark-mode .notif-header {
+  background: #2d3035;
+  border-bottom-color: rgba(255,255,255,0.1);
+}
+
+.notif-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+}
+
+.mark-read-btn {
+  background: rgba(227, 139, 64, 0.1);
+  border: none;
+  color: var(--primary-orange);
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+
+.mark-read-btn:hover {
+  background: var(--primary-orange);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* --- 4. List Area & Scrollbar --- */
+.notif-list {
+  max-height: 420px;
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
+
+/* Fancy Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-orange);
+}
+
+/* --- 5. Notification Items --- */
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+  position: relative;
+}
+
+.notif-item:hover {
+  background-color: rgba(227, 139, 64, 0.03);
+  transform: translateX(4px);
+}
+
+body.dark-mode .notif-item:hover {
+  background-color: rgba(255,255,255,0.05);
+}
+
+/* Unread State Style */
+.notif-item.unread {
+  background-color: rgba(227, 139, 64, 0.06); /* Subtle orange tint */
+  border-left: 3px solid var(--primary-orange);
+}
+
+body.dark-mode .notif-item.unread {
+  background-color: rgba(227, 139, 64, 0.15);
+}
+
+/* Avatar & Status */
+.notif-avatar-container {
+  position: relative;
+  margin-right: 15px;
+}
+
+.notif-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.notif-item:hover .notif-avatar {
+  transform: scale(1.1);
+}
+
+body.dark-mode .notif-avatar {
+  border-color: #4a5568;
+}
+
+/* Green Online/Status Dot */
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  background-color: var(--primary-orange);
+  border: 2px solid white;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { box-shadow: 0 0 0 0 rgba(227, 139, 64, 0.7); }
+  70% { box-shadow: 0 0 0 5px rgba(227, 139, 64, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(227, 139, 64, 0); }
+}
+
+/* Content */
+.notif-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.notif-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  line-height: 1.4;
+  font-weight: 500;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.notif-item.unread .notif-text {
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.notif-time {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+/* --- 6. Empty State --- */
+.no-notifs {
+  padding: 50px 20px;
+  text-align: center;
+  color: var(--text-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.empty-icon-circle {
+  width: 60px;
+  height: 60px;
+  background: var(--background-section);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.muted-icon {
+  color: var(--text-light);
+  opacity: 0.5;
+}
+
+/* --- 7. Footer / Load More --- */
+.load-more-notifs {
+  width: 100%;
+  padding: 15px;
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--border-color);
+  color: var(--primary-orange);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.load-more-notifs:hover {
+  background: rgba(227, 139, 64, 0.05);
+  letter-spacing: 0.5px;
+}
+
+/* --- 8. Loading Spinner --- */
+.notif-loading {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(227, 139, 64, 0.3);
+  border-top-color: var(--primary-orange);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* src/styles/notifications.css */
+
+/* --- 1. Main Dropdown Container (Responsive) --- */
+.notification-dropdown {
+  position: absolute;
+  top: 150%; /* Just below the bell */
+  right: -5px; /* Aligns to right edge of bell container */
+  
+  /* Desktop Width */
+  width: 360px;
+  
+  /* ✅ RESPONSIVE FIX: Limit width on mobile */
+  max-width: 85vw; 
+  
+  /* Glass Effect */
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0,0,0,0.05);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  
+  animation: dropdownEntrance 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  transform-origin: top right;
+}
+
+/* ✅ Mobile Specific Adjustment */
+@media (max-width: 480px) {
+  .notification-dropdown {
+    right: -60px; /* Shift left slightly so it centers better on small screens */
+    width: 300px;
+  }
+  
+  /* Adjust arrow to follow the bell */
+  .notification-dropdown::before {
+    right: 68px !important; 
+  }
+}
+
+body.dark-mode .notification-dropdown {
+  background: rgba(30, 30, 30, 0.95);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes dropdownEntrance {
+  0% { opacity: 0; transform: translateY(-10px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- 2. Arrow Tip --- */
+.notification-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 14px; /* Standard alignment */
+  width: 14px;
+  height: 14px;
+  background: white; /* Header background color */
+  transform: rotate(45deg);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  z-index: 2001;
+}
+
+body.dark-mode .notification-dropdown::before {
+  background: #2d3035; /* Dark mode header bg */
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- 3. Header Styling --- */
+.notif-header {
+  padding: 15px;
+  background: linear-gradient(to right, #f9fafb, #fff);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2002;
+}
+
+body.dark-mode .notif-header {
+  background: #2d3035;
+}
+
+.notif-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+}
+
+.mark-read-btn {
+  background: rgba(227, 139, 64, 0.1);
+  border: none;
+  color: var(--primary-orange);
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.mark-read-btn:hover {
+  background: var(--primary-orange);
+  color: white;
+}
+
+/* --- 4. List & Items --- */
+.notif-list {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+  position: relative;
+}
+
+.notif-item:hover {
+  background-color: rgba(227, 139, 64, 0.03);
+}
+
+.notif-item.unread {
+  background-color: rgba(227, 139, 64, 0.05);
+  border-left: 3px solid var(--primary-orange);
+}
+
+.notif-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.notif-text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.notif-time {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  margin-top: 4px;
+  display: block;
+}
+
+/* --- 5. Loading & Empty --- */
+.load-more-notifs {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--border-color);
+  color: var(--primary-orange);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.load-more-notifs:hover {
+  background: rgba(227, 139, 64, 0.05);
+}
+
+.no-notifs {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.notif-loading {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(227, 139, 64, 0.3);
+  border-top-color: var(--primary-orange);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+
+.notification-dropdown{
+  justify-content: left;
+}

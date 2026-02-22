@@ -1,0 +1,360 @@
+/* src/styles/forms.css */
+
+/* =========================================
+   1. ANIMATED BACKGROUND (Crazy & Vivid)
+   ========================================= */
+@keyframes animatedGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Shared Section Styles for Login & Signup */
+.signup-section,
+.login-section {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 90vh; /* Ensure full viewport height visibility */
+  
+  /* RESPONSIVE PADDING: Small on mobile, handled by flex centering */
+  padding: 4rem 1.5rem; 
+
+  /* Vivid Gradient Background */
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1, #fbc2eb);
+  background-size: 400% 400%;
+  animation: animatedGradient 12s ease infinite;
+}
+
+/* Dark Mode Gradient */
+body.dark-mode .signup-section,
+body.dark-mode .login-section {
+  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #4b134f, #c94b4b);
+  background-size: 400% 400%;
+}
+
+/* =========================================
+   2. GLASSMORPHISM CARD
+   ========================================= */
+.signup-form-card,
+.login-form-card {
+  /* Frosted Glass Effect */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  
+  padding: 3rem 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); /* Deep smooth shadow */
+  
+  width: 100%;
+  max-width: 600px; /* Constrain width for readability */
+  text-align: center;
+  
+  /* Entrance Float Animation */
+  animation: floatUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Dark Mode Card */
+body.dark-mode .signup-form-card,
+body.dark-mode .login-form-card {
+  background: rgba(30, 30, 30, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   3. TYPOGRAPHY
+   ========================================= */
+.signup-title,
+.login-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  /* Gradient Text Clip */
+  background: linear-gradient(135deg, #333 0%, #555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+body.dark-mode .signup-title, 
+body.dark-mode .login-title { 
+  background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.signup-subtitle,
+.login-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+  font-weight: 500;
+}
+
+body.dark-mode .signup-subtitle, 
+body.dark-mode .login-subtitle { color: #a0aec0; }
+
+/* =========================================
+   4. INPUTS & LABELS
+   ========================================= */
+.form-group-row {
+  display: flex;
+  flex-direction: column; /* Stack on Mobile */
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.signup-form .form-group,
+.login-form .form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+  width: 100%;
+}
+
+/* Labels with Flex for Icons */
+.signup-form label,
+.login-form label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+body.dark-mode .signup-form label, 
+body.dark-mode .login-form label { color: #cbd5e0; }
+
+/* Input Fields */
+.signup-form input:not([type="radio"]),
+.login-form input:not([type="radio"]) {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #2d3748;
+  background-color: rgba(240, 242, 245, 0.8);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+body.dark-mode .signup-form input:not([type="radio"]), 
+body.dark-mode .login-form input:not([type="radio"]) {
+  background-color: rgba(26, 32, 44, 0.6);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Focus Effect (Glow) */
+.signup-form input:focus,
+.login-form input:focus {
+  background-color: #fff;
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 4px rgba(227, 139, 64, 0.15);
+  outline: none;
+  transform: scale(1.01);
+}
+
+body.dark-mode .signup-form input:focus, 
+body.dark-mode .login-form input:focus {
+  background-color: #2d3748;
+}
+
+/* =========================================
+   5. FILE INPUTS (Signup Specific)
+   ========================================= */
+input[type="file"] {
+  padding: 0.6rem;
+  background: #fff;
+  border: 2px dashed #cbd5e0 !important;
+}
+
+body.dark-mode input[type="file"] {
+  background: rgba(26, 32, 44, 0.6);
+  border-color: #4a5568 !important;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: var(--primary-orange);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 1rem;
+  font-weight: 600;
+  transition: transform 0.2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  transform: scale(1.05);
+}
+
+/* Size Hint */
+.size-hint {
+  font-size: 0.8rem;
+  color: #718096;
+  font-weight: 400;
+  margin-left: 5px;
+}
+body.dark-mode .size-hint { color: #a0aec0; }
+
+/* =========================================
+   6. RADIO BUTTONS
+   ========================================= */
+.radio-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+  color: #4a5568;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.radio-label:hover {
+  background-color: rgba(227, 139, 64, 0.1);
+}
+
+body.dark-mode .radio-label { color: #cbd5e0; }
+
+.radio-label input {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: 8px;
+  accent-color: var(--primary-orange);
+  cursor: pointer;
+}
+
+/* =========================================
+   7. BUTTONS (Login & Signup)
+   ========================================= */
+.create-account-btn,
+.login-btn {
+  margin-top: 2rem;
+  width: 100%;
+  padding: 1.1rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #e38b40, #ff6b6b);
+  border: none;
+  color: white;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(227, 139, 64, 0.3);
+}
+
+.create-account-btn:hover,
+.login-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(227, 139, 64, 0.5);
+  animation: pulseBtn 1.5s infinite;
+}
+
+@keyframes pulseBtn {
+  0% { box-shadow: 0 0 0 0 rgba(227, 139, 64, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(227, 139, 64, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(227, 139, 64, 0); }
+}
+
+/* =========================================
+   8. ERROR ALERTS (Shake)
+   ========================================= */
+.error-alert {
+  background-color: #fee2e2;
+  border: 1px solid #ef4444;
+  border-left: 6px solid #ef4444;
+  color: #b91c1c;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+body.dark-mode .error-alert {
+  background-color: #450a0a;
+  border-color: #7f1d1d;
+  border-left-color: #f87171;
+  color: #fca5a5;
+}
+
+.error-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* =========================================
+   9. LINKS & FOOTERS
+   ========================================= */
+.login-prompt, .signup-prompt {
+  margin-top: 2rem;
+  color: #718096;
+}
+
+body.dark-mode .login-prompt, 
+body.dark-mode .signup-prompt { color: #a0aec0; }
+
+.login-link, .signup-link, .forgot-password-link {
+  color: var(--primary-orange);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.login-link:hover, .signup-link:hover {
+  text-decoration: underline;
+  color: #c05621;
+}
+
+/* Forgot Password Specifics */
+.forgot-password-link {
+  display: block;
+  text-align: right;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+/* =========================================
+   10. DESKTOP RESPONSIVENESS
+   ========================================= */
+@media (min-width: 768px) {
+  .form-group-row {
+    flex-direction: row; /* Switch to side-by-side on larger screens */
+  }
+}
