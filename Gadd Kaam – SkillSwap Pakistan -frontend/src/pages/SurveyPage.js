@@ -33,13 +33,13 @@ function SurveyPage({ onChatbotToggle }) {
         {submitted ? (
           <div className="survey-success reveal fade-up">
             <CheckCircle2 size={64} color="var(--success-color)" style={{ marginBottom: '1rem' }} />
-            <h2>🎉 {t('survey_page_title') === 'Community Survey' ? 'Thank you for your feedback!' : t('survey_page_title') === 'کمیونٹی سروے' ? 'آپ کی رائے کا شکریہ!' : 'توهان جي راءِ جو مهرباني!'}</h2>
-            <p>{t('survey_page_title') === 'Community Survey' ? 'Your response helps us improve Gadd Kaam.' : t('survey_page_title') === 'کمیونٹی سروے' ? 'آپ کا جواب گڈ کام کو بہتر بنانے میں مدد کرتا ہے۔' : 'توهان جو جواب گڏ ڪم کي بهتر بنائڻ ۾ مدد ڪري ٿو.'}</p>
+            <h2>🎉 {t('survey_thank_you')}</h2>
+            <p>{t('survey_success_desc')}</p>
           </div>
         ) : (
           <form className="survey-form reveal fade-up" onSubmit={handleSubmit}>
             <div className="survey-field">
-              <label>{t('survey_page_title') === 'Community Survey' ? 'How would you rate your experience? (1-10)' : t('survey_page_title') === 'کمیونٹی سروے' ? 'آپ اپنے تجربے کو کس طرح درجہ بندی کریں گے؟ (1-10)' : 'توهان پنهنجي تجربي کي ڪيئن درجه بندي ڪندؤ؟ (1-10)'}</label>
+              <label>{t('survey_rating_label')}</label>
               <div className="survey-rating-group">
                 {[1,2,3,4,5,6,7,8,9,10].map(n => (
                   <button type="button" key={n} className={`survey-rating-btn ${rating === n ? 'active' : ''}`} onClick={() => setRating(n)}>{n}</button>
@@ -48,22 +48,22 @@ function SurveyPage({ onChatbotToggle }) {
             </div>
 
             <div className="survey-field">
-              <label>{t('survey_page_title') === 'Community Survey' ? 'What do you like most about Gadd Kaam?' : t('survey_page_title') === 'کمیونٹی سروے' ? 'آپ کو گڈ کام میں سب سے زیادہ کیا پسند ہے؟' : 'توهان کي گڏ ڪم ۾ سڀ کان وڌيڪ ڇا پسند آهي؟'}</label>
+              <label>{t('survey_like_label')}</label>
               <textarea placeholder="..." />
             </div>
 
             <div className="survey-field">
-              <label>{t('survey_page_title') === 'Community Survey' ? 'What can we improve?' : t('survey_page_title') === 'کمیونٹی سروے' ? 'ہم کیا بہتر کر سکتے ہیں؟' : 'اسان ڇا بهتر ڪري سگهون ٿا؟'}</label>
+              <label>{t('survey_improve_label')}</label>
               <textarea placeholder="..." />
             </div>
 
             <div className="survey-field">
-              <label>{t('survey_page_title') === 'Community Survey' ? 'Would you recommend Gadd Kaam to a friend?' : t('survey_page_title') === 'کمیونٹی سروے' ? 'کیا آپ گڈ کام کی سفارش کریں گے؟' : 'ڇا توهان گڏ ڪم جي سفارش ڪندؤ؟'}</label>
+              <label>{t('survey_recommend_label')}</label>
               <select defaultValue="">
                 <option value="" disabled>---</option>
-                <option value="yes">{t('survey_page_title') === 'Community Survey' ? 'Definitely!' : t('survey_page_title') === 'کمیونٹی سروے' ? 'بالکل!' : 'يقينن!'}</option>
-                <option value="maybe">{t('survey_page_title') === 'Community Survey' ? 'Maybe' : t('survey_page_title') === 'کمیونٹی سروے' ? 'شاید' : 'شايد'}</option>
-                <option value="no">{t('survey_page_title') === 'Community Survey' ? 'Not yet' : t('survey_page_title') === 'کمیونٹی سروے' ? 'ابھی نہیں' : 'اڃا نه'}</option>
+                <option value="yes">{t('survey_recommend_definitely')}</option>
+                <option value="maybe">{t('survey_recommend_maybe')}</option>
+                <option value="no">{t('survey_recommend_not_yet')}</option>
               </select>
             </div>
 
