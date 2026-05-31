@@ -263,6 +263,7 @@ function MarketplacePage({ onChatbotToggle }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [availableCategories, setAvailableCategories] = useState([]);
+  const [selectedCity, setSelectedCity] = useState('');
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -278,7 +279,7 @@ function MarketplacePage({ onChatbotToggle }) {
   useEffect(() => {
     applyFilters();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allSkills, searchTerm, selectedCategories]);
+  }, [allSkills, searchTerm, selectedCategories, selectedCity]);
 
   const fetchAllSkills = async () => {
     setLoading(true);
@@ -314,6 +315,11 @@ function MarketplacePage({ onChatbotToggle }) {
         (offer.user?.username && offer.user.username.toLowerCase().includes(lower))
       );
     }
+    if (selectedCity) {
+      currentFiltered = currentFiltered.filter(offer =>
+        offer.location && offer.location.toLowerCase().includes(selectedCity.toLowerCase())
+      );
+    }
     if (selectedCategories.length > 0) {
       currentFiltered = currentFiltered.filter(offer =>
         offer.skills.some(s => selectedCategories.includes(s))
@@ -328,7 +334,7 @@ function MarketplacePage({ onChatbotToggle }) {
     );
   };
 
-  const clearFilters = () => { setSearchTerm(''); setSelectedCategories([]); };
+  const clearFilters = () => { setSearchTerm(''); setSelectedCategories([]); setSelectedCity(''); };
   const openHelplinePopup = () => setShowHelplinePopup(true);
   const closeHelplinePopup = () => setShowHelplinePopup(false);
   const handleLogout = () => {
@@ -380,6 +386,30 @@ function MarketplacePage({ onChatbotToggle }) {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
+
+              {/* Provincial City Quick Filters */}
+              <div className="flex items-center gap-2 mb-5 overflow-x-auto pb-2 scrollbar-none">
+                <MapPin size={16} className="text-slate-400 dark:text-slate-500 flex-shrink-0" />
+                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mr-2 uppercase tracking-wider">{t('filter_by_city') || "City"}:</span>
+                <button
+                  type="button"
+                  onClick={() => setSelectedCity('')}
+                  className={`px-3 py-1.5 text-[11px] font-bold rounded-xl border flex items-center gap-1 cursor-pointer transition-all duration-200 ${!selectedCity ? 'bg-orange-500/10 border-orange-500/30 text-primary-orange shadow-sm' : 'bg-white/40 dark:bg-slate-800/40 border-slate-200/50 dark:border-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-primary-orange'}`}
+                >
+                  <Globe size={12} /> {t('all_cities') || "All Pakistan"}
+                </button>
+                {['Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 'Peshawar', 'Quetta'].map(city => (
+                  <button
+                    type="button"
+                    key={city}
+                    onClick={() => setSelectedCity(selectedCity === city ? '' : city)}
+                    className={`px-3 py-1.5 text-[11px] font-bold rounded-xl border flex items-center gap-1 cursor-pointer transition-all duration-200 ${selectedCity === city ? 'bg-orange-500/10 border-orange-500/30 text-primary-orange shadow-sm' : 'bg-white/40 dark:bg-slate-800/40 border-slate-200/50 dark:border-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-primary-orange'}`}
+                  >
+                    <MapPin size={12} /> {city}
+                  </button>
+                ))}
+              </div>
+
               <div className="category-filters">
                 <Tag size={20} className="filter-icon" />
                 {availableCategories.length > 0 ? (
@@ -394,7 +424,7 @@ function MarketplacePage({ onChatbotToggle }) {
                     </button>
                   ))
                 ) : <p>{t('no_categories_available')}</p>}
-                {(searchTerm || selectedCategories.length > 0) && <button className="clear-filters-btn" onClick={clearFilters}>{t('clear_all_filters')}</button>}
+                {(searchTerm || selectedCategories.length > 0 || selectedCity) && <button className="clear-filters-btn" onClick={clearFilters}>{t('clear_all_filters')}</button>}
               </div>
             </div>
 
