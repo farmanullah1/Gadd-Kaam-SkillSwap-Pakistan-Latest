@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator');
 const { awardBadge } = require('../utils/badgeUtils'); // ✅ Import Badge Utils
 
 // ✅ Helper function to create notifications safely
-const createNotification = async (recipientId, senderId, type, referenceId, text) => {
+const createNotification = async (recipientId, senderId, type, referenceId, text, io = null) => {
     try {
         if (recipientId.toString() === senderId.toString()) return; 
         
@@ -21,6 +21,13 @@ const createNotification = async (recipientId, senderId, type, referenceId, text
             text
         });
         await newNotification.save();
+
+        if (io) {
+            const populatedNotif = await Notification.findById(newNotification._id)
+                .populate('sender', 'username profilePicture')
+                .lean();
+            io.to(recipientId.toString()).emit('notification_received', populatedNotif);
+        }
     } catch (err) {
         console.error('Notification creation failed:', err.message);
     }
@@ -72,7 +79,8 @@ router.post('/', auth, [
             senderId, 
             'request_received', 
             request._id, 
-            `${senderUser.username} requested your skill: ${skillOffer.skills[0]}`
+            `${senderUser.username} requested your skill: ${skillOffer.skills[0]}`,
+            req.app.get('io')
         );
 
         const populatedRequest = await Request.findById(request._id)
@@ -151,7 +159,8 @@ router.post('/:id/accept', auth, async (req, res) => {
             req.user.id, 
             'request_accepted', 
             request._id, 
-            `${accepter.username} accepted your skill swap request!`
+            `${accepter.username} accepted your skill swap request!`,
+            req.app.get('io')
         );
 
         const populatedRequest = await Request.findById(request._id)
@@ -187,7 +196,8 @@ router.post('/:id/cancel', auth, async (req, res) => {
             req.user.id,
             'request_cancelled',
             request._id,
-            `${canceller.username} cancelled the skill request.`
+            `${canceller.username} cancelled the skill request.`,
+            req.app.get('io')
         );
 
         res.json({ msg: 'Request cancelled successfully', request });
@@ -242,7 +252,8 @@ router.post('/:id/confirm-skill-received', auth, async (req, res) => {
                 userId,
                 'skill_confirmed',
                 request._id,
-                `${confirmer.username} confirmed they received the skill.`
+                `${confirmer.username} confirmed they received the skill.`,
+                req.app.get('io')
             );
         }
 
@@ -272,7 +283,13 @@ router.post('/:id/messages', auth, async (req, res) => {
 
         if (request.status === 'completed') return res.status(400).json({ msg: 'Exchange completed. Messages closed.' });
 
-        const newMessage = { sender: req.user.id, text: text, timestamp: new Date() };
+        const newMessage = { 
+            sender: req.user.id, 
+            text: text, 
+            mediaUrl: req.body.mediaUrl || null,
+            mediaType: req.body.mediaType || 'none',
+            timestamp: new Date() 
+        };
         request.messages.push(newMessage);
         await request.save();
 
@@ -285,13 +302,20 @@ router.post('/:id/messages', auth, async (req, res) => {
             req.user.id,
             'message',
             request._id,
-            `New message from ${senderUser.username}`
+            `New message from ${senderUser.username}`,
+            req.app.get('io')
         );
 
         const updatedRequest = await Request.findById(request._id)
             .populate('messages.sender', 'username profilePicture')
             .select('messages');
         const latestMessage = updatedRequest.messages[updatedRequest.messages.length - 1];
+
+        // WebSocket emit to the request room
+        const io = req.app.get('io');
+        if (io) {
+            io.to(request._id.toString()).emit('new_message', latestMessage);
+        }
 
         res.status(201).json(latestMessage);
     } catch (err) {

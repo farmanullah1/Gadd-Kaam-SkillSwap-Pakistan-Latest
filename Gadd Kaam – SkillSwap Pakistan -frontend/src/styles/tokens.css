@@ -1,0 +1,347 @@
+/* src/styles/tokens.css — Design Token Layer (the ONLY shared stylesheet) */
+
+:root {
+  /* HSL Color Palette Tokens */
+  --primary-hsl: 26 84% 57%; /* Vibrant Premium Orange HSL */
+  --primary-orange: hsl(var(--primary-hsl));
+  --primary-hover-light: hsl(var(--primary-hsl) / 8%);
+  
+  --text-dark: #1e293b; /* Slate-800 for high readability */
+  --text-medium: #475569; /* Slate-600 */
+  --text-light: #94a3b8; /* Slate-400 */
+  
+  --background-page: #f8fafc; /* Slate-50 overall background */
+  --background-section: #f1f5f9; /* Slate-100 */
+  --card-background: #ffffff;
+  --input-background: #ffffff;
+  --border-color: #e2e8f0; /* Slate-200 */
+  --border-color-light: #f1f5f9;
+  
+  --button-primary-bg: var(--primary-orange);
+  --button-primary-text: #ffffff;
+  --button-primary-hover-bg: hsl(26 84% 47%);
+  
+  --button-secondary-bg: #f8fafc;
+  --button-secondary-text: var(--primary-orange);
+  --button-secondary-hover-bg: var(--primary-orange);
+  --button-secondary-hover-text: #ffffff;
+  
+  --button-danger-bg: #ef4444; /* Red-500 */
+  --button-danger-hover-bg: #dc2626; /* Red-600 */
+  --success-color: #22c55e; /* Green-500 */
+  --success-light-bg: #dcfce7; /* Green-100 */
+  --error-color: #ef4444;
+  --error-light-bg: #fee2e2;
+  --warning-color: #f59e0b; /* Amber-500 */
+  --warning-light-bg: #fef3c7;
+  --info-color: #3b82f6; /* Blue-500 */
+  --info-light-bg: #dbeafe;
+  
+  --star-filled-color: #f59e0b;
+  --star-empty-color: #e2e8f0;
+  --tag-background: #e2e8f0;
+  --tag-text-color: #475569;
+  --navbar-background: var(--background-page);
+  --top-bar-bg: #f1f5f9;
+  --icon-color: #475569;
+  --primary-orange-rgb: 227, 139, 64;
+  --light-blue-review-border: #bae6fd;
+  
+  /* Missing global color tokens added for high contrast */
+  --logo-orange: #ff6b00;
+  --background-beige: #fbfbf9;
+  --text-light-gray: #64748b;
+  
+  --max-content-width: 1280px;
+  --navbar-height: 80px;
+
+  /* Fluid Typography using clamp */
+  --font-xs: clamp(0.72rem, 0.68rem + 0.2vw, 0.82rem);
+  --font-sm: clamp(0.82rem, 0.78rem + 0.25vw, 0.95rem);
+  --font-base: clamp(0.95rem, 0.9rem + 0.3vw, 1.05rem);
+  --font-lg: clamp(1.08rem, 1.02rem + 0.35vw, 1.2rem);
+  --font-xl: clamp(1.2rem, 1.12rem + 0.45vw, 1.45rem);
+  --font-2xl: clamp(1.45rem, 1.32rem + 0.65vw, 1.85rem);
+  --font-3xl: clamp(1.85rem, 1.68rem + 0.85vw, 2.5rem);
+  --font-4xl: clamp(2.3rem, 2.05rem + 1.25vw, 3.4rem);
+  
+  /* Accessible Tap Target Helpers */
+  --tap-target-min: 48px;
+
+  /* Premium Glassmorphism Design Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
+  --glass-blur: blur(12px);
+  --global-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+  --text-dark: #f1f5f9; /* Slate-100 */
+  --text-medium: #cbd5e1; /* Slate-300 */
+  --text-light: #64748b; /* Slate-500 */
+  --background-page: #0f172a; /* Slate-900 */
+  --background-section: #1e293b; /* Slate-800 */
+  --card-background: #1e293b;
+  --input-background: #0f172a;
+  --border-color: #334155; /* Slate-700 */
+  --border-color-light: #1e293b;
+  
+  --button-primary-bg: var(--primary-orange);
+  --button-primary-hover-bg: hsl(26 84% 65%);
+  --button-secondary-bg: #1e293b;
+  --button-secondary-text: var(--primary-orange);
+  --button-secondary-hover-bg: var(--primary-orange);
+  --button-secondary-hover-text: #ffffff;
+  
+  --button-danger-bg: #f87171; /* Red-400 */
+  --button-danger-hover-bg: #ef4444;
+  --success-color: #4ade80; /* Green-400 */
+  --success-light-bg: rgba(74, 222, 128, 0.15);
+  --error-color: #f87171;
+  --error-light-bg: rgba(248, 113, 113, 0.15);
+  --warning-color: #fbbf24; /* Amber-400 */
+  --warning-light-bg: rgba(251, 191, 36, 0.15);
+  --info-color: #38bdf8; /* Sky-400 */
+  --info-light-bg: rgba(56, 189, 248, 0.15);
+  
+  --star-filled-color: #fbbf24;
+  --star-empty-color: #334155;
+  --tag-background: #334155;
+  --tag-text-color: #cbd5e1;
+  --navbar-background: #0f172a;
+  --top-bar-bg: #1e293b;
+  --icon-color: #cbd5e1;
+  --light-blue-review-border: #0284c7;
+
+  /* Added global color tokens inside dark mode scope */
+  --logo-orange: #ff7c1a;
+  --background-beige: #1e293b;
+  --text-light-gray: #cbd5e1;
+
+  /* Glassmorphism Dark Mode Tokens */
+  --glass-bg: rgba(15, 23, 42, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* ── Base Body Reset ── */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-page);
+  color: var(--text-dark);
+  transition: var(--global-transition);
+}
+
+/* Base page container classes */
+.home-page-container,
+.signup-page-container,
+.login-page-container,
+.dashboard-page-container,
+.marketplace-page,
+.women-only-zone-page,
+.messages-page,
+.received-requests-page,
+.reviews-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--background-page);
+  color: var(--text-dark);
+  transition: var(--global-transition);
+}
+
+/* ── Viewport Overflow & Layout Protection ── */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.app-container {
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Base image rules */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mobile-first touch padding guidelines */
+button, 
+.btn, 
+.nav-link, 
+.menu-item, 
+a {
+  min-height: calc(var(--tap-target-min) - 4px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Suspense Glassmorphic Loading Overlay ── */
+.suspense-loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  animation: fadeInSuspense 0.3s ease-out forwards;
+}
+
+@keyframes fadeInSuspense {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.suspense-loading-container .spinner-overlay {
+  position: relative;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  width: auto;
+  height: auto;
+}
+
+/* ── Shared Scroll Reveal Utilities (used by 12+ pages) ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.reveal-up.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.reveal-scale.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reveal.fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.fade-up.active { opacity: 1; transform: translateY(0); }
+.reveal.fade-down { opacity: 0; transform: translateY(-40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.fade-down.active { opacity: 1; transform: translateY(0); }
+.reveal.fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.fade-left.active { opacity: 1; transform: translateX(0); }
+.reveal.fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.fade-right.active { opacity: 1; transform: translateX(0); }
+.reveal.scale-up { opacity: 0; transform: scale(0.92); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.scale-up.active { opacity: 1; transform: scale(1); }
+
+/* Cross-site readability and orange action system */
+body,
+.app-container {
+  color: var(--text-dark);
+  background-color: var(--bg-color);
+}
+
+body.dark-mode,
+body.dark-mode .app-container {
+  color: var(--text-dark);
+  background-color: var(--bg-color);
+}
+
+.btn-primary-orange,
+.btn-signup,
+.btn-signup-mobile,
+.btn-newsletter,
+.btn-landing-primary,
+.post-skill-btn,
+.support-submit-btn,
+button[type="submit"] {
+  background: linear-gradient(135deg, var(--primary-orange), #ff7e5f) !important;
+  color: #ffffff !important;
+  border-color: rgba(var(--primary-orange-rgb), 0.7) !important;
+  box-shadow: 0 12px 30px rgba(var(--primary-orange-rgb), 0.32), 0 0 0 1px rgba(255, 255, 255, 0.08) inset !important;
+}
+
+.btn-primary-orange:hover,
+.btn-signup:hover,
+.btn-signup-mobile:hover,
+.btn-newsletter:hover,
+.btn-landing-primary:hover,
+.post-skill-btn:hover,
+.support-submit-btn:hover,
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px rgba(var(--primary-orange-rgb), 0.42), 0 0 24px rgba(var(--primary-orange-rgb), 0.28) !important;
+}
+
+.btn-login,
+.btn-login-mobile,
+.btn-secondary-back,
+.btn-landing-secondary,
+.btn-ghost {
+  color: var(--text-dark) !important;
+  background: var(--button-secondary-bg) !important;
+  border-color: var(--border-color) !important;
+}
+
+body.dark-mode .btn-login,
+body.dark-mode .btn-login-mobile,
+body.dark-mode .btn-secondary-back,
+body.dark-mode .btn-landing-secondary,
+body.dark-mode .btn-ghost {
+  color: var(--text-dark) !important;
+  background: #162033 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}

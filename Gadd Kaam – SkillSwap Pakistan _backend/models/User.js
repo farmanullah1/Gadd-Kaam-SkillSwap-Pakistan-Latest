@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
+const { encrypt, decrypt } = require('../utils/cryptoUtils');
 
 const UserSchema = new mongoose.Schema({
   firstName: { type: String, required: true, trim: true },
@@ -8,7 +10,19 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true, trim: true, lowercase: true },
   phoneNumber: { type: String, required: true, unique: true, trim: true },
   dateOfBirth: { type: Date, required: true },
-  cnicNumber: { type: String, required: true, unique: true, trim: true },
+  cnicNumber: { 
+    type: String, 
+    required: true, 
+    trim: true,
+    get: decrypt,
+    set: encrypt
+  },
+  cnicHash: { 
+    type: String, 
+    required: true, 
+    unique: true, 
+    index: true 
+  },
   gender: { type: String, required: true, enum: ['Male', 'Female'] },
   password: { type: String, required: true, minlength: 6 },
   profilePicture: { type: String, required: false },
@@ -36,6 +50,9 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Badge'
   }]
+}, { 
+  toJSON: { getters: true }, 
+  toObject: { getters: true } 
 });
 
 // Hash password before saving
@@ -43,6 +60,16 @@ UserSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
+  }
+  next();
+});
+
+// Generate cnicHash before validation so that the required validator passes
+UserSchema.pre('validate', function (next) {
+  if (this.cnicNumber && this.isModified('cnicNumber')) {
+    // Decrypt the setter-encrypted value to get plain text, then hash it
+    const plainCnic = decrypt(this.cnicNumber);
+    this.cnicHash = crypto.createHash('sha256').update(plainCnic).digest('hex');
   }
   next();
 });

@@ -1,6 +1,6 @@
 // src/components/ReportUserModal.js
 import React, { useState } from 'react';
-import '../styles/popup.css'; // Reusing popup styles
+
 import { X, AlertTriangle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

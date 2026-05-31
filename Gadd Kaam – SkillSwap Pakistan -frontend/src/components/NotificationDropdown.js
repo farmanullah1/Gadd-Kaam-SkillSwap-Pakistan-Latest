@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Bell, Check, Clock, X } from 'lucide-react'; // Added icons
+import { Bell, Check, Clock } from 'lucide-react'; // Added icons
 import { useTranslation } from 'react-i18next';
-import '../styles/notifications.css';
+
 
 const getProfileImageUrl = (path) => {
   if (!path) return 'https://placehold.co/40x40/e0e0e0/666666?text=U';
@@ -24,7 +24,21 @@ const NotificationDropdown = ({ onClose }) => {
 
   useEffect(() => {
     fetchNotifications(1, true);
-    // eslint-disable-next-line
+    
+    // Listen to real-time notifications from socket
+    const handleNewNotif = (event) => {
+      const newNotif = event.detail;
+      setNotifications(prev => {
+        if (prev.some(n => n._id === newNotif._id)) return prev;
+        return [newNotif, ...prev];
+      });
+    };
+    
+    window.addEventListener('socket_notification', handleNewNotif);
+    
+    return () => {
+      window.removeEventListener('socket_notification', handleNewNotif);
+    };
   }, []);
 
   const fetchNotifications = async (pageNum, reset = false) => {
@@ -58,6 +72,7 @@ const NotificationDropdown = ({ onClose }) => {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
+      window.dispatchEvent(new CustomEvent('notifications_marked_all_read'));
     } catch (err) { console.error(err); }
   };
 
@@ -68,6 +83,7 @@ const NotificationDropdown = ({ onClose }) => {
         await axios.put(`${process.env.REACT_APP_API_URL}/api/notifications/${notif._id}/read`, {}, {
           headers: { Authorization: `Bearer ${token}` }
         });
+        window.dispatchEvent(new CustomEvent('notification_marked_read_single'));
       } catch (e) {}
     }
     onClose();

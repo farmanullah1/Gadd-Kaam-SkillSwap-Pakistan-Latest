@@ -1,223 +1,452 @@
 /* src/styles/popup.css */
 
-/* Helpline Popup Styles */
+/* --- GLOBAL POPUP OVERLAYS --- */
+.popup-overlay,
 .helpline-popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.5); /* Modern deep slate translucent overlay */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
-  backdrop-filter: blur(5px);
+  z-index: 10000 !important; /* Ensure it floats above absolutely everything */
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 1.5rem;
+  box-sizing: border-box;
 }
 
+/* --- PREMIUM GLASSMORPHIC POPUP CARD --- */
+.popup-content,
 .helpline-popup-content {
-  background-color: var(--card-background);
-  padding: 2rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.72) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  padding: 2.5rem 2rem !important;
+  border-radius: 24px !important;
+  box-shadow: 
+    0 8px 32px 0 rgba(31, 38, 135, 0.06),
+    0 20px 40px -10px rgba(15, 23, 42, 0.12),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6) !important;
   text-align: center;
   position: relative;
-  max-width: 90%;
-  width: 350px;
-  transform: scale(1);
-  animation: fadeInZoom 0.3s ease-out forwards;
+  max-width: 100%;
+  width: 440px !important;
+  box-sizing: border-box;
+  transform: translateY(20px) scale(0.96);
+  animation: modalReveal 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  color: var(--text-dark) !important;
+  transition: background 0.3s, border 0.3s, box-shadow 0.3s;
 }
 
-/* Animation for popup appearing */
-@keyframes fadeInZoom {
-  from {
+/* Dark Mode Overwrites */
+body.dark-mode .popup-content,
+body.dark-mode .helpline-popup-content {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.35),
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.06) !important;
+  color: #f1f5f9 !important;
+}
+
+/* --- SPRING ANIMATION FOR MODALS --- */
+@keyframes modalReveal {
+  0% {
     opacity: 0;
-    transform: scale(0.9);
+    transform: translateY(30px) scale(0.95);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
-.helpline-popup-close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: var(--text-dark);
-  line-height: 1;
-  padding: 0.25rem;
-  transition: color 0.2s ease;
-}
-
-.helpline-popup-close-btn:hover {
-  color: var(--logo-orange);
-}
-
-.helpline-popup-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.helpline-number {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--logo-orange);
-  margin-bottom: 0.5rem;
-}
-
-.helpline-note {
-  font-size: 0.95rem;
-  color: var(--text-light-gray);
-  margin-top: 0;
-}
-
-/* Generic Popup Modal Styles */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  backdrop-filter: blur(5px);
-}
-
-.popup-content {
-  background-color: var(--card-background);
-  padding: 2.5rem 2rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  position: relative;
-  max-width: 90%;
-  width: 400px;
-  animation: fadeInZoom 0.3s ease-out forwards;
-  border-left: 5px solid var(--border-color);
-}
-
+/* --- POPUP SPECIFIC VARIATIONS --- */
 .popup-content.success {
-  border-left-color: var(--success-green);
+  border-top: 5px solid var(--success-color) !important;
+}
+.popup-content.error,
+.popup-content.danger {
+  border-top: 5px solid var(--error-color) !important;
 }
 
-.popup-close-btn {
+/* --- POPUP CLOSE BUTTON --- */
+.popup-close-btn,
+.close-btn {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: var(--text-dark);
-  line-height: 1;
-  padding: 0.25rem;
-  transition: color 0.2s ease;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(15, 23, 42, 0.05) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  color: var(--text-medium) !important;
+  transition: all 0.25s ease !important;
+  padding: 0 !important;
 }
 
-.popup-close-btn:hover {
-  color: var(--logo-orange);
+.popup-close-btn:hover,
+.close-btn:hover {
+  background: rgba(227, 139, 64, 0.15) !important;
+  color: var(--primary-orange) !important;
+  transform: rotate(90deg);
 }
 
+body.dark-mode .popup-close-btn,
+body.dark-mode .close-btn {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .popup-close-btn:hover,
+body.dark-mode .close-btn:hover {
+  background: rgba(227, 139, 64, 0.25) !important;
+  color: var(--primary-orange) !important;
+}
+
+/* --- POPUP TYPOGRAPHY --- */
 .popup-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  font-size: 1.75rem !important;
+  font-weight: 800 !important;
+  color: var(--text-dark) !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.75rem !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+}
+
+body.dark-mode .popup-title {
+  color: #f8fafc !important;
 }
 
 .popup-content.success .popup-title {
-  color: var(--success-green);
+  color: var(--success-color) !important;
 }
 
 .popup-message {
-  font-size: 1rem;
-  color: var(--text-medium);
-  margin-bottom: 1.5rem;
+  font-size: 1.05rem !important;
+  color: var(--text-medium) !important;
+  line-height: 1.6 !important;
+  margin-bottom: 2rem !important;
+  font-weight: 500 !important;
 }
 
+body.dark-mode .popup-message {
+  color: #cbd5e1 !important;
+}
+
+/* --- HELPLINE STYLING --- */
+.helpline-number {
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  color: var(--primary-orange) !important;
+  margin-bottom: 0.75rem !important;
+  letter-spacing: 0.02em !important;
+  text-shadow: 0 2px 10px rgba(227, 139, 64, 0.1);
+  display: block;
+}
+
+body.dark-mode .helpline-number {
+  text-shadow: 0 4px 15px rgba(227, 139, 64, 0.25);
+}
+
+.helpline-note {
+  font-size: 0.9rem !important;
+  color: var(--text-light) !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.5rem !important;
+  font-weight: 400 !important;
+  line-height: 1.4;
+}
+
+body.dark-mode .helpline-note {
+  color: #94a3b8 !important;
+}
+
+/* --- ACTIONS & BUTTONS --- */
 .popup-actions {
-  display: flex;
-  justify-content: center;
+  display: flex !important;
+  justify-content: center !important;
+  gap: 1rem !important;
+  width: 100%;
 }
 
 .popup-btn {
-  padding: 10px 24px;
-  min-width: 120px;
+  padding: 0.75rem 1.75rem !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  min-width: 120px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1) !important;
+  cursor: pointer !important;
+  border: none !important;
 }
-/* Add to src/styles/popup.css */
 
+.popup-btn:active {
+  transform: scale(0.95) !important;
+}
+
+/* Standard Button Colors inside Popup context */
+.btn-primary-orange,
+.popup-btn.btn-primary-orange,
+.popup-btn.confirm-btn {
+  background: var(--primary-orange) !important;
+  color: #ffffff !important;
+}
+
+.btn-primary-orange:hover,
+.popup-btn.btn-primary-orange:hover,
+.popup-btn.confirm-btn:hover {
+  background: hsl(26, 84%, 48%) !important;
+  box-shadow: 0 8px 20px -4px rgba(227, 139, 64, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.btn-secondary-light,
+.popup-btn.btn-secondary-light,
+.btn-secondary-cancel,
+.popup-btn.btn-secondary-cancel,
+.btn-secondary,
+.popup-btn.btn-secondary {
+  background: rgba(15, 23, 42, 0.06) !important;
+  color: var(--text-medium) !important;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+}
+
+.btn-secondary-light:hover,
+.popup-btn.btn-secondary-light:hover,
+.btn-secondary-cancel:hover,
+.popup-btn.btn-secondary-cancel:hover,
+.btn-secondary:hover,
+.popup-btn.btn-secondary:hover {
+  background: rgba(15, 23, 42, 0.1) !important;
+  color: var(--text-dark) !important;
+  transform: translateY(-2px) !important;
+}
+
+body.dark-mode .btn-secondary-light,
+body.dark-mode .popup-btn.btn-secondary-light,
+body.dark-mode .btn-secondary-cancel,
+body.dark-mode .popup-btn.btn-secondary-cancel,
+body.dark-mode .btn-secondary,
+body.dark-mode .popup-btn.btn-secondary {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #cbd5e1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body.dark-mode .btn-secondary-light:hover,
+body.dark-mode .popup-btn.btn-secondary-light:hover,
+body.dark-mode .btn-secondary-cancel:hover,
+body.dark-mode .popup-btn.btn-secondary-cancel:hover,
+body.dark-mode .btn-secondary:hover,
+body.dark-mode .popup-btn.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+/* Danger Button */
+.btn-danger,
+.popup-btn.btn-danger {
+  background: var(--button-danger-bg, #ef4444) !important;
+  color: #ffffff !important;
+}
+
+.btn-danger:hover,
+.popup-btn.btn-danger:hover {
+  background: var(--button-danger-hover-bg, #dc2626) !important;
+  box-shadow: 0 8px 20px -4px rgba(239, 68, 68, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.btn-danger:disabled,
+.popup-btn.btn-danger:disabled {
+  background: rgba(239, 68, 68, 0.4) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.6;
+}
+
+/* --- REPORT MODAL SPECIFIC STYLES --- */
 .report-modal {
-    max-width: 500px;
-    text-align: left;
+  width: 500px !important;
+  max-width: 100% !important;
+  text-align: left !important;
 }
 
 .report-modal .popup-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  margin-bottom: 1.5rem !important;
 }
 
 .icon-circle.red {
-    background-color: #fee2e2;
-    color: #dc2626;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 15px;
+  background-color: rgba(239, 68, 68, 0.12) !important;
+  color: var(--button-danger-bg, #ef4444) !important;
+  width: 68px !important;
+  height: 68px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 1rem !important;
+  border: 1px solid rgba(239, 68, 68, 0.2) !important;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.1);
+}
+
+body.dark-mode .icon-circle.red {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2);
 }
 
 .report-options {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 20px 0;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  margin: 1.5rem 0 !important;
+  width: 100%;
 }
 
 .radio-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  padding: 0.85rem 1.2rem !important;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  transition: all 0.2s ease !important;
+  box-sizing: border-box;
 }
 
 .radio-option:hover {
-    background-color: var(--background-section);
+  background: rgba(227, 139, 64, 0.06) !important;
+  border-color: rgba(227, 139, 64, 0.25) !important;
+  transform: translateX(4px);
+}
+
+body.dark-mode .radio-option {
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  background: rgba(15, 23, 42, 0.2) !important;
+}
+
+body.dark-mode .radio-option:hover {
+  background: rgba(227, 139, 64, 0.12) !important;
+  border-color: rgba(227, 139, 64, 0.4) !important;
+}
+
+.radio-option input {
+  accent-color: var(--primary-orange) !important;
+  width: 18px !important;
+  height: 18px !important;
+  cursor: pointer !important;
+}
+
+.radio-option span {
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: var(--text-dark) !important;
+}
+
+body.dark-mode .radio-option span {
+  color: #cbd5e1 !important;
+}
+
+.radio-option input:checked {
+  border-color: var(--primary-orange) !important;
 }
 
 .radio-option input:checked + span {
-    font-weight: 600;
-    color: var(--error-red);
+  color: var(--primary-orange) !important;
 }
 
-.btn-danger {
-    background-color: var(--error-red);
-    color: white;
-    border: none;
+body.dark-mode .radio-option input:checked + span {
+  color: var(--primary-orange) !important;
 }
-.btn-danger:hover {
-    background-color: #b91c1c;
+
+/* Custom Textarea for custom report reasoning */
+.report-modal .textarea-field {
+  width: 100% !important;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(15, 23, 42, 0.1) !important;
+  border-radius: 12px !important;
+  padding: 0.8rem 1rem !important;
+  font-size: 0.95rem !important;
+  color: var(--text-dark) !important;
+  transition: all 0.3s ease !important;
+  resize: vertical;
 }
-.btn-danger:disabled {
-    background-color: #fca5a5;
-    cursor: not-allowed;
+
+body.dark-mode .report-modal .textarea-field {
+  background: rgba(15, 23, 42, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #cbd5e1 !important;
+}
+
+.report-modal .textarea-field:focus {
+  border-color: var(--primary-orange) !important;
+  box-shadow: 0 0 0 3px rgba(227, 139, 64, 0.15) !important;
+  background: #ffffff !important;
+}
+
+body.dark-mode .report-modal .textarea-field:focus {
+  background: #0f172a !important;
+}
+
+/* --- MOBILE RESPONSIVENESS (Down to 320px) --- */
+@media (max-width: 480px) {
+  .popup-overlay,
+  .helpline-popup-overlay {
+    padding: 1rem;
+  }
+
+  .popup-content,
+  .helpline-popup-content {
+    padding: 2rem 1.25rem !important;
+    border-radius: 20px !important;
+  }
+
+  .popup-title {
+    font-size: 1.45rem !important;
+  }
+
+  .popup-message {
+    font-size: 0.95rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .helpline-number {
+    font-size: 1.65rem !important;
+  }
+
+  .popup-actions {
+    flex-direction: column-reverse !important;
+    gap: 0.75rem !important;
+  }
+
+  .popup-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 0.7rem 1.5rem !important;
+  }
 }

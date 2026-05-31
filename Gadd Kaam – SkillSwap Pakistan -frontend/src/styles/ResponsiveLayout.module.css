@@ -1,0 +1,462 @@
+/* src/styles/ResponsiveLayout.module.css - Scoped Responsive Page Styling */
+
+/* 1. Responsive Base Resets scoped for this component */
+:global(html) {
+  font-size: 100%; /* 16px default */
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 768px) {
+  :global(html) {
+    font-size: 93.75%; /* 15px on mobile */
+  }
+}
+
+/* Local Component variables for premium color schemes & spacing scaling */
+.responsiveLayoutContainer {
+  --color-primary: #ff6b00; /* Gadd Kaam Orange */
+  --color-primary-hover: #e05a00;
+  --color-bg-dark: #0f172a; /* Slate 900 */
+  --color-bg-light: #f8fafc; /* Slate 50 */
+  --color-card-dark: #1e293b; /* Slate 800 */
+  --color-card-light: #ffffff;
+  --color-text-dark: #1e293b;
+  --color-text-light: #cbd5e1;
+  --color-border-light: #cbd5e1;
+  --color-border-dark: #334155;
+
+  /* Spacing Scale - Default Desktop values */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+}
+
+/* Global Dark Mode override support for the container */
+:global(body.dark-mode) .responsiveLayoutContainer {
+  background-color: var(--color-bg-dark);
+  color: #f1f5f9;
+}
+
+/* Mobile Spacing Scale: Reduced by exactly 25% */
+@media (max-width: 768px) {
+  .responsiveLayoutContainer {
+    --space-xs: 0.375rem;  /* 0.5rem * 0.75 */
+    --space-sm: 0.75rem;   /* 1rem * 0.75 */
+    --space-md: 1.125rem;  /* 1.5rem * 0.75 */
+    --space-lg: 1.5rem;    /* 2rem * 0.75 */
+    --space-xl: 2.25rem;   /* 3rem * 0.75 */
+  }
+}
+
+/* 2. Responsive Typography Rules */
+.responsiveLayoutContainer h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.2;
+  font-weight: 800;
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary);
+}
+
+.responsiveLayoutContainer h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  margin-top: 0;
+}
+
+.responsiveLayoutContainer p {
+  /* Enforce minimum body text size of 14px on all devices using clamp with mixed units */
+  font-size: clamp(14px, 4vw, 1.125rem);
+  line-height: 1.5;
+  margin-bottom: var(--space-md);
+}
+
+/* 3. Header & Navigation (Responsive Flex) */
+.header {
+  background-color: var(--color-card-light);
+  border-bottom: 1px solid var(--color-border-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+:global(body.dark-mode) .header {
+  background-color: var(--color-card-dark);
+  border-color: var(--color-border-dark);
+}
+
+.headerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-sm) var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .headerContainer {
+    padding: var(--space-sm) var(--space-sm);
+  }
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+/* Mobile Menu Button - Enforced 44x44px tap target on mobile */
+.menuToggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  
+  /* Enforced minimum tap target */
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+}
+
+:global(body.dark-mode) .menuToggle {
+  border-color: var(--color-border-dark);
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .menuToggle {
+    display: flex;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  text-decoration: none;
+  color: var(--color-text-dark);
+  font-weight: 600;
+  transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  
+  /* Enforced minimum tap target */
+  min-height: 44px;
+  padding: 0 0.5rem;
+}
+
+:global(body.dark-mode) .navLink {
+  color: var(--color-text-light);
+}
+
+.navLink:hover {
+  color: var(--color-primary);
+}
+
+/* Mobile Nav Overlay List */
+@media (max-width: 768px) {
+  .nav {
+    display: none; /* Controlled dynamically in React state */
+  }
+  
+  .navActive {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-card-light);
+    border-bottom: 1px solid var(--color-border-light);
+    padding: var(--space-md);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  :global(body.dark-mode) .navActive {
+    background-color: var(--color-card-dark);
+    border-color: var(--color-border-dark);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  }
+
+  .navList {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .navLink {
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 0.5rem 0;
+  }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* 4. Layout & Containers */
+.main {
+  flex: 1;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-lg);
+}
+
+@media (max-width: 1024px) {
+  /* Tablet Breakpoint: Flex layout stack */
+  .container {
+    grid-template-columns: 1fr;
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile Breakpoint: Smaller padding */
+  .container {
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+  }
+}
+
+/* 5. Main Content Panel & Cards Grid */
+.contentArea {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.introSection {
+  background: linear-gradient(135deg, hsl(var(--primary-hsl) / 8%) 0%, rgba(255, 107, 0, 0.02) 100%);
+  padding: var(--space-lg);
+  border-radius: 16px;
+  border: 1px solid var(--color-border-light);
+}
+
+:global(body.dark-mode) .introSection {
+  border-color: var(--color-border-dark);
+}
+
+/* 3-Column Responsive Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background-color: var(--color-card-light);
+  border: 1px solid var(--color-border-light);
+  border-radius: 16px;
+  padding: var(--space-md);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+:global(body.dark-mode) .card {
+  background-color: var(--color-card-dark);
+  border-color: var(--color-border-dark);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+/* Interactive CTA Button: Enforced 44x44px tap target on mobile */
+.ctaBtn {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(255, 107, 0, 0.2);
+  
+  /* Enforced minimum tap target */
+  min-height: 44px;
+  padding: 0 2rem;
+}
+
+.ctaBtn:hover {
+  background-color: var(--color-primary-hover);
+  transform: scale(1.03);
+}
+
+/* 6. Sidebar (Widget Layout) */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.widget {
+  background-color: var(--color-card-light);
+  border: 1px solid var(--color-border-light);
+  border-radius: 16px;
+  padding: var(--space-md);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+:global(body.dark-mode) .widget {
+  background-color: var(--color-card-dark);
+  border-color: var(--color-border-dark);
+}
+
+/* 7. Media & Images (Responsive Scale) */
+.imageWrapper {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background-color: #cbd5e1;
+  aspect-ratio: 4 / 3;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  
+  /* Enforced responsive scale */
+  max-width: 100%;
+  height: auto;
+}
+
+/* 8. Footer (Typical 3-Column Visual Grid) */
+.footer {
+  background-color: var(--color-card-light);
+  border-top: 1px solid var(--color-border-light);
+  padding: var(--space-xl) var(--space-lg) var(--space-lg) var(--space-lg);
+  margin-top: auto;
+  transition: all 0.3s ease;
+}
+
+:global(body.dark-mode) .footer {
+  background-color: var(--color-card-dark);
+  border-color: var(--color-border-dark);
+}
+
+.footerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+  .footerContainer {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+.footerColumn h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary);
+}
+
+.footerColumn ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.footerLink {
+  color: var(--color-text-dark);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* Touch target min */
+}
+
+:global(body.dark-mode) .footerLink {
+  color: var(--color-text-light);
+}
+
+.footerLink:hover {
+  color: var(--color-primary);
+}
+
+.copyright {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border-light);
+  font-size: 0.85rem;
+  color: var(--color-text-dark);
+}
+
+:global(body.dark-mode) .copyright {
+  border-color: var(--color-border-dark);
+  color: var(--color-text-light);
+}

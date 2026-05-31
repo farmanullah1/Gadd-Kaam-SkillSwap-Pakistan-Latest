@@ -1,12 +1,99 @@
 /* src/index.css */
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
-  font-family: 'Inter', sans-serif; /* Your chosen font */
-  background-color: rgb(245, 245, 220); /* Your chosen background color */
-  color: rgb(50, 50, 50); /* A dark grey for general text readability */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+/* ── Design tokens (CSS custom properties used by all sheets) ── */
+@import "./styles/tokens.css";
+
+/* ── Page-level stylesheets consolidated through Tailwind pipeline ── */
+@import "./styles/landing.css";
+@import "./styles/homepage.css";
+@import "./styles/forms.css";
+@import "./styles/popup.css";
+@import "./styles/dashboard.css";
+@import "./styles/profile.css";
+@import "./styles/my-skills.css";
+@import "./styles/marketplace.css";
+@import "./styles/LoadingSpinner.css";
+@import "./styles/chatbot-modal.css";
+@import "./styles/requests.css";
+@import "./styles/reviews.css";
+@import "./styles/admin.css";
+@import "./styles/leaderboard.css";
+@import "./styles/helpcenter.css";
+@import "./styles/barterstories.css";
+@import "./styles/platformstatus.css";
+@import "./styles/careers.css";
+@import "./styles/blog.css";
+@import "./styles/partners.css";
+@import "./styles/survey.css";
+@import "./styles/contentpages.css";
+@import "./styles/contact.css";
+@import "./styles/messages.css";
+@import "./styles/notifications.css";
+
+@theme {
+  /* Brand colors matching Gadd Kaam */
+  --color-primary-orange: #ff6b00;
+  --color-primary-orange-hover: #e05e00;
+  --color-dark-bg: #0f172a;
+  --color-dark-card: #1e293b;
+  --color-dark-border: #334155;
+  
+  --color-slate-dark: #1e293b;
+  --color-slate-medium: #475569;
+  --color-slate-light: #94a3b8;
+  
+  --color-accent-teal: #14b8a6;
+  --color-accent-amber: #f59e0b;
+  --color-accent-blue: #3b82f6;
+
+  /* Custom animations and values */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-alert-pop: alertPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  --animate-slide-down-nav: slideDownNav 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Add the Inter font import */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@keyframes slideDownNav {
+  0% { transform: translateY(-100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes type-delete-loop {
+  0%, 40%   { max-width: 0;    }
+  45%, 90%  { max-width: 100%; }
+  95%, 100% { max-width: 0;    }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50%      { border-color: #ff6b00; }
+}
+
+@keyframes bellShake {
+  0%, 50% { transform: rotate(0); }
+  5%  { transform: rotate(15deg); }
+  10% { transform: rotate(-10deg); }
+  15% { transform: rotate(5deg); }
+  20% { transform: rotate(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(1.05); }
+}
+
+@keyframes alertPop {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}

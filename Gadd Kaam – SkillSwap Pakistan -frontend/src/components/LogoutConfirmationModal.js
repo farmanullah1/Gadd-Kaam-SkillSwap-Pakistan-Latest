@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
-import '../styles/popup.css'; // Reusing your existing popup styles
+
 
 function LogoutConfirmationModal({ isOpen, onConfirm, onCancel }) {
   const { t } = useTranslation(); // Initialize useTranslation

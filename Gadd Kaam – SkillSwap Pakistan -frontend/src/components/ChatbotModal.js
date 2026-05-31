@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { X, Send, Bot, User, Sparkles, RefreshCw } from 'lucide-react';
-import '../styles/chatbot-modal.css';
+
 
 const ChatbotModal = ({ onClose }) => {
   const [messages, setMessages] = useState([
@@ -97,6 +97,58 @@ const ChatbotModal = ({ onClose }) => {
   // --- 2. MASSIVE KNOWLEDGE BASE (Local Logic) ---
   const getSmartResponse = (question) => {
     const q = question.toLowerCase();
+
+    // === NEW SPECIFIC DETAILED MULTILINGUAL NODES ===
+    // 1. Performance Badges System
+    if (q.match(/(badge|performance badge|award badge|first swap|top rated|community pillar|تمغے|تمغو)/)) {
+      return `🌟 **Gadd Kaam Performance Badges System / قد کام بیجز کا نظام / پرفارمنس بيجز**\n\n` +
+             `English: We have a beautiful Performance Badge system! Admins award badges to users based on their swapping achievements and helpfulness. Badges include:\n` +
+             `- **First Swap**: Awarded automatically on double-confirming your first skill exchange.\n` +
+             `- **Top Rated**: For users with 5+ reviews and an average rating of 4.5+ stars.\n` +
+             `- **Community Pillar**: Awarded manually by Admins for exceptional contributions to the cashless network.\n\n` +
+             `Urdu: ہمارے پاس بیجز کا بہترین نظام موجود ہے! ایڈمنز صارفین کی کارکردگی اور ہنر کے تبادلے کی بنیاد پر انہیں مختلف بیجز دیتے ہیں جیسے:\n` +
+             `- **پہلا تبادلہ (First Swap)**: جب آپ اپنا پہلا تبادلہ کامیابی سے مکمل کریں گے۔\n` +
+             `- **اعلیٰ درجہ (Top Rated)**: 5 سے زائد ریٹنگز اور 4.5+ اوسط حاصل کرنے پر۔\n` +
+             `- **کمیونٹی کا ستون (Community Pillar)**: ایڈمن کی طرف سے خاص کارکردگی پر۔\n\n` +
+             `Sindhi: اسان وٽ هڪ شاندار پرفارمنس بيج سسٽم آهي! ايڊمنس استعمال ڪندڙن کي انهن جي هنر جي بدلاءُ جي بنياد تي بيجز ڏيندا آهن:\n` +
+             `- **پهريون تبادلو (First Swap)**: پهرين ڪامياب تبادلي تي پاڻمرادو ملندو آهي.\n` +
+             `- **ٽاپ ريٽيڊ (Top Rated)**: 5 کان وڌيڪ ريويوز ۽ 4.5+ اسٽارز حاصل ڪرڻ تي.\n` +
+             `- **ڪميونٽي جو ٿنڀو (Community Pillar)**: ايڊمن پاران خاص خدمت عيوض.`;
+    }
+
+    // 2. Women's Zone Privacy & Security Guidelines
+    if (q.match(/(women zone|ladies|female|saf|privacy|women only|خواتین|عورتن)/)) {
+      return `🛡️ **Women's Only Zone Privacy & Security Guidelines / خواتین کا مخصوص زون / عورتن جو زون**\n\n` +
+             `English: The Women-Only Zone is a highly secure, private space built to empower Pakistani women entrepreneurs, designers, and artisans. It has strict privacy guidelines:\n` +
+             `- **Strict Vetting**: Only verified female users can access this section.\n` +
+             `- **Absolute Visibility Shield**: Male users CANNOT search, view, or request any skills posted in this zone.\n` +
+             `- **Safe & Free**: Swap home chef skills, tutoring, design, or tailory safely.\n\n` +
+             `Urdu: خواتین کا مخصوص زون ایک انتہائی محفوظ اور نجی جگہ ہے جس کا مقصد خواتین کاروباریوں کو بااختیار بنانا ہے:\n` +
+             `- **سخت تصدیق**: صرف تصدیق شدہ خواتین ہی اس سیکشن میں جا سکتی ہیں۔\n` +
+             `- **مکمل پردہ**: مرد صارفین اس زون میں پوسٹ کیے گئے ہنر اور پروفائلز کو بالکل نہیں دیکھ سکتے۔\n` +
+             `- **محفوظ تبادلہ**: کوکنگ، پڑھائی، سلائی یا ڈیزائننگ کا محفوظ تبادلہ کریں۔\n\n` +
+             `Sindhi: عورتن لاءِ خاص زون هڪ انتهائي محفوظ ۽ پرائيويٽ جڳهه آهي جنهن جو مقصد عورتن کي بااختيار بڻائڻ آهي:\n` +
+             `- **سخت تصدیق**: صرف تصديق ٿيل عورتون ئي هن حصي تائين رسائي حاصل ڪري سگهن ٿيون.\n` +
+             `- **مڪمل پردو**: مرد استعمال ڪندڙ هن زون ۾ هنرن ۽ پروفائلن کي بلڪل نٿا ڏسي سگهن.\n` +
+             `- **محفوظ بدلاءُ**: پڙهائي، رڌ پچاءُ، سلائي يا ڊيزائننگ جو محفوظ تبادلو ڪريو.`;
+    }
+
+    // 3. Pakistan Skill Swapping Mechanics & Hours Saved
+    if (q.match(/(swap mechanics|how swapping work|cashless|zero cash|hour|تبادلہ|بدلاءُ)/)) {
+      return `🤝 **Cashless Skill Swapping Mechanics in Pakistan / ہنر کے تبادلے کا طریقہ / هنر جي مٽاسٽا**\n\n` +
+             `English: Gadd Kaam is Pakistan's first cashless talent-swap network using simulated hour counters. The mechanics are:\n` +
+             `- **Pure Barter**: No money, banks, or cards required. You trade your time and expertise directly.\n` +
+             `- **Double-Confirmation**: A swap completes when BOTH participants confirm they received each other's skill. This ensures zero scams and awards the 'First Swap' badge.\n` +
+             `- **Review Loop**: Once completed, you are redirected to leave a review and endorse skills.\n\n` +
+             `Urdu: قد کام پاکستان کا پہلا بغیر پیسوں کے ہنر کا نیٹ ورک ہے جس میں وقت کے گھنٹوں کا تبادلہ ہوتا ہے:\n` +
+             `- **خالص بارٹر**: کوئی پیسہ، بینک یا کارڈ درکار نہیں۔ آپ براہ راست وقت کا تبادلہ کرتے ہیں۔\n` +
+             `- **دو طرفہ تصدیق**: تبادلہ تب ہی مکمل ہوتا ہے جب دونوں فریق ہنر ملنے کی تصدیق کریں۔ اس سے دھوکہ دہی کا خاتمہ ہوتا ہے۔\n` +
+             `- **ریویو لوپ**: تبادلہ مکمل ہونے پر آپ کو ریویو پیج پر بھیجا جائے گا۔\n\n` +
+             `Sindhi: گڏ ڪم پاڪستان جو پهريون بغير پيسن جي هنر جو نيٽ ورڪ آهي جتي وقت جي ڪلاڪن جو تبادلو ٿيندو آهي:\n` +
+             `- **خالص بارٽر**: ڪو به پئسو يا بئنڪ اڪائونٽ گهربل ناهي. توهان سڌو سنئون وقت جو سودو ڪندا آهيو.\n` +
+             `- **ٻه طرفي تصديق**: مٽا سٽا تڏهن مڪمل ٿيندي جڏهن ٻئي ڌريون هنر ملڻ جي تصديق ڪن. هي ٺڳي کان بچائي ٿو.\n` +
+             `- **ريويو لوپ**: مڪمل ٿيڻ کانپوءِ توهان کي ريويو پيج تي موڪليو ويندو.`;
+    }
 
     // =========================================================
     // 1. ACCOUNT & LOGIN / REGISTRATION

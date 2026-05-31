@@ -392,3 +392,183 @@
     justify-content: center;
     border: 1px solid var(--primary-orange);
 }
+
+/* Account Security & Accordions styling */
+.security-settings-card {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--card-shadow);
+  margin-top: 30px;
+}
+
+.security-accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.accordion-item {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--input-background);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-item.active {
+  border-color: var(--primary-orange);
+  background: var(--card-background);
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.05);
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+  transition: background 0.2s;
+}
+
+.accordion-header:hover {
+  background: rgba(255, 107, 0, 0.02);
+}
+
+.accordion-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 1.05rem;
+}
+
+.accordion-title-wrapper svg {
+  color: var(--primary-orange);
+}
+
+.accordion-chevron {
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid var(--text-medium);
+  border-right: 2px solid var(--text-medium);
+  transform: rotate(45deg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-right: 4px;
+}
+
+.accordion-item.active .accordion-chevron {
+  transform: rotate(-135deg);
+  border-color: var(--primary-orange);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-item.active .accordion-content {
+  max-height: 800px; /* Large enough to allow contents */
+}
+
+.accordion-inner-form {
+  padding: 0 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 1px dashed var(--border-color);
+  padding-top: 20px;
+}
+
+/* CNIC Verification Layout */
+.cnic-upload-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 15px 0;
+}
+
+@media (max-width: 768px) {
+  .cnic-upload-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cnic-upload-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cnic-preview-container {
+  height: 160px;
+  border: 2px dashed var(--border-color);
+  border-radius: 12px;
+  background: var(--input-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.cnic-preview-container:hover {
+  border-color: var(--primary-orange);
+}
+
+.cnic-img-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cnic-placeholder-icon {
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-label {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.upload-label:hover {
+  background: rgba(255, 107, 0, 0.05) !important;
+  color: var(--primary-orange) !important;
+}
+
+/* Danger Zone Custom Styling */
+.danger-item {
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.danger-item.active {
+  border-color: #ef4444;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.05);
+}
+
+.danger-header:hover {
+  background: rgba(239, 68, 68, 0.02);
+}
+
+.warning-panel {
+  border-left: 4px solid #ef4444;
+  background: rgba(239, 68, 68, 0.02);
+  border-radius: 8px;
+}
+
+.security-icon-glow {
+  filter: drop-shadow(0 0 4px rgba(255, 107, 0, 0.2));
+}

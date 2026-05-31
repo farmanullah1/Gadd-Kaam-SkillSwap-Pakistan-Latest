@@ -1,6 +1,6 @@
 import React from 'react';
 import { VscClose } from 'react-icons/vsc';
-import '../styles/popup.css'; // Ensure this CSS file exists and contains relevant styles
+
 import { useTranslation } from 'react-i18next'; // Added for consistency, though 'Ok' might be the only translatable part initially
 
 function SuccessMessageModal({ isOpen, title, message, onClose, onConfirm, type = 'info' }) {

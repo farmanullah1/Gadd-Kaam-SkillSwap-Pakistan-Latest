@@ -13,6 +13,15 @@ const MessageSchema = new Schema({
         type: String,
         required: true
     },
+    mediaUrl: {
+        type: String,
+        required: false
+    },
+    mediaType: {
+        type: String,
+        enum: ['image', 'video', 'document', 'audio', 'none'],
+        default: 'none'
+    },
     timestamp: {
         type: Date,
         default: Date.now

@@ -1,0 +1,210 @@
+/* src/styles/platformstatus.css */
+
+.platformstatus-page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-page);
+  color: var(--text-dark);
+  font-family: 'Inter', sans-serif;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(227, 139, 64, 0.04) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(227, 139, 64, 0.04) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+.platformstatus-main {
+  flex-grow: 1;
+  max-width: 1100px;
+  width: 100%;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.platformstatus-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.platformstatus-header h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, var(--text-dark) 40%, var(--primary-orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode .platformstatus-header h1 {
+  background: linear-gradient(135deg, #ffffff 40%, var(--primary-orange));
+  -webkit-background-clip: text;
+}
+
+.platformstatus-header p {
+  font-size: 1.15rem;
+  color: var(--text-medium);
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.status-indicator-banner {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #16a34a;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 15px rgba(34,197,94,0.05);
+}
+
+body.dark-mode .status-indicator-banner {
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+}
+
+.status-pulse-dot {
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  border-radius: 50%;
+  animation: statusPulse 1.5s infinite alternate;
+}
+
+@keyframes statusPulse {
+  from { opacity: 0.4; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px currentColor; }
+}
+
+.metrics-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.metric-status-card {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  transition: all 0.3s ease;
+}
+
+.metric-status-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-orange);
+  box-shadow: 0 15px 35px rgba(227, 139, 64, 0.08);
+}
+
+.metric-icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(227, 139, 64, 0.08);
+  color: var(--primary-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem auto;
+}
+
+.metric-status-card:nth-child(2) .metric-icon-box {
+  background: rgba(59, 130, 246, 0.08);
+  color: #3b82f6;
+}
+
+.metric-status-card:nth-child(3) .metric-icon-box {
+  background: rgba(167, 139, 250, 0.08);
+  color: #8b5cf6;
+}
+
+.metric-status-card:nth-child(4) .metric-icon-box {
+  background: rgba(16, 185, 129, 0.08);
+  color: #10b981;
+}
+
+.metric-value-text {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.metric-label-text {
+  font-size: 0.95rem;
+  color: var(--text-medium);
+  font-weight: 600;
+}
+
+.metric-sub-label {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.live-logs-card {
+  background: #0f172a;
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #38bdf8;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.live-logs-card h2 {
+  font-size: 1.4rem;
+  color: #f1f5f9;
+  font-family: 'Inter', sans-serif;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.live-logs-terminal {
+  height: 250px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.9rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+}
+
+.log-entry-row {
+  display: flex;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.log-time {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.log-success {
+  color: #4ade80;
+}
+
+.log-info {
+  color: #38bdf8;
+}
+
+.log-warn {
+  color: #fbbf24;
+}

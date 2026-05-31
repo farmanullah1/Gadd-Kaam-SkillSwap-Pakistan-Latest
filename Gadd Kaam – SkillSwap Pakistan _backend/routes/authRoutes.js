@@ -8,6 +8,7 @@ const User = require('../models/User');
 const keys = require('../config/keys');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 
 const generateToken = (id, role) => {
   return jwt.sign({ user: { id, role } }, keys.jwtSecret, { expiresIn: '7d' });
@@ -101,7 +102,8 @@ router.post('/register', (req, res, next) => {
 
     try {
       // 4. Check Duplicate User
-      let user = await User.findOne({ $or: [{ username }, { email }, { cnicNumber }] });
+      const cnicHash = crypto.createHash('sha256').update(cnicNumber).digest('hex');
+      let user = await User.findOne({ $or: [{ username }, { email }, { cnicHash }] });
       if (user) {
         cleanupFiles(req.files);
         return res.status(400).json({ errors: [{ msg: 'User with these credentials (Email, Username, or CNIC) already exists' }] });
@@ -167,8 +169,9 @@ router.post('/login', [
 
     const { credential, password } = req.body;
     try {
+      const credentialHash = crypto.createHash('sha256').update(credential).digest('hex');
       const user = await User.findOne({
-        $or: [{ username: credential.toLowerCase() }, { email: credential.toLowerCase() }, { cnicNumber: credential }],
+        $or: [{ username: credential.toLowerCase() }, { email: credential.toLowerCase() }, { cnicHash: credentialHash }],
       });
 
       if (!user) return res.status(400).json({ msg: 'Invalid Credentials' });
