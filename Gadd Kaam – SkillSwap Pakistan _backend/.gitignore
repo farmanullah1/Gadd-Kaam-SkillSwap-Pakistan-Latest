@@ -1,23 +1,26 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Dependencies
+node_modules/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
+# Production & logs
+/dist
 /build
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
+coverage/
+*.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+config/.env
+
+# Uploads
+uploads/*
+!uploads/.gitkeep
+!uploads/skill_photos/.gitkeep
+
+# Temporary and backup files
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db

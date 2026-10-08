@@ -2,10 +2,27 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const path = require('path');
-const auth = require('../middleware/auth'); 
+const jwt = require('jsonwebtoken');
+const keys = require('../config/keys');
 const Chat = require('../models/Chat');
 
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 require('dotenv').config({ path: path.join(__dirname, '..', 'config', '.env') });
+
+// Optional auth: allows guests to chat without 401 error, attaches user if token is present
+const optionalAuth = (req, res, next) => {
+  const authHeader = req.header('Authorization');
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.split(' ')[1];
+    try {
+      const decoded = jwt.verify(token, keys.jwtSecret);
+      req.user = decoded.user;
+    } catch (err) {
+      // Token invalid or expired, continue as guest
+    }
+  }
+  next();
+};
 
 // --- 🧠 SITE KNOWLEDGE BASE (The Brain) ---
 // This text teaches the AI about your specific website features.
@@ -58,8 +75,15 @@ const getLocalResponse = (msg) => {
 };
 
 // --- GET: Fetch Chat History ---
-router.get('/history', auth, async (req, res) => {
+router.get('/history', optionalAuth, async (req, res) => {
   try {
+    if (!req.user) {
+      return res.json([{ 
+        sender: 'bot', 
+        text: "Hi! I'm Gadd Kaam AI. I know everything about the Marketplace, Women's Zone, and swapping skills. Ask me anything!" 
+      }]);
+    }
+
     const chat = await Chat.findOne({ user: req.user.id });
     if (!chat) {
       return res.json([{ 
@@ -76,21 +100,26 @@ router.get('/history', auth, async (req, res) => {
 });
 
 // --- POST: Send Message ---
-router.post('/', auth, async (req, res) => {
+router.post('/', optionalAuth, async (req, res) => {
   const { message } = req.body;
-  const userId = req.user.id;
+  if (!message || typeof message !== 'string') {
+    return res.status(400).json({ msg: 'Message is required' });
+  }
+
+  const userId = req.user ? req.user.id : null;
 
   try {
-    // 1. Get/Create Chat History
-    let chat = await Chat.findOne({ user: userId });
-    if (!chat) chat = new Chat({ user: userId, messages: [] });
-    
-    // 2. Save User Message
-    chat.messages.push({ sender: 'user', text: message });
+    // 1. Get/Create Chat History (for authenticated users)
+    let chat = null;
+    if (userId) {
+      chat = await Chat.findOne({ user: userId });
+      if (!chat) chat = new Chat({ user: userId, messages: [] });
+      chat.messages.push({ sender: 'user', text: message });
+    }
 
     let botReply = "";
 
-    // 3. Try Cohere API (Primary)
+    // 2. Try Cohere API (Primary)
     if (process.env.COHERE_API_KEY) {
       try {
         const response = await axios.post(
@@ -99,7 +128,7 @@ router.post('/', auth, async (req, res) => {
             message: message,
             preamble: SITE_KNOWLEDGE, // ✅ Inject Site Knowledge here
             temperature: 0.3,
-            connectors: [{ id: "web-search" }] // Optional: Lets it search web if needed (usually paid, but good to have struct)
+            connectors: [{ id: "web-search" }]
           },
           { headers: { Authorization: `Bearer ${process.env.COHERE_API_KEY}` } }
         );
@@ -112,14 +141,16 @@ router.post('/', auth, async (req, res) => {
       }
     } 
 
-    // 4. Failover: Local Brain
+    // 3. Failover: Local Brain
     if (!botReply) {
       botReply = getLocalResponse(message);
     }
 
-    // 5. Save Bot Response
-    chat.messages.push({ sender: 'bot', text: botReply });
-    await chat.save();
+    // 4. Save Bot Response (if authenticated)
+    if (chat) {
+      chat.messages.push({ sender: 'bot', text: botReply });
+      await chat.save();
+    }
 
     res.json({ reply: botReply });
 

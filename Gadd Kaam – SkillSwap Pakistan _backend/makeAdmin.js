@@ -3,8 +3,9 @@ const User = require('./models/User');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
-// 👇 REPLACE THIS WITH THE EMAIL YOU WANT TO MAKE ADMIN
-const TARGET_EMAIL = " farma0nullahansari999@gmail.com"; 
+// Provide target email via command line: node makeAdmin.js user@example.com
+// or set ADMIN_EMAIL in .env
+const TARGET_EMAIL = (process.argv[2] || process.env.ADMIN_EMAIL || "farmanullahansari999@gmail.com").trim().toLowerCase(); 
 
 const makeUserAdmin = async () => {
   try {

@@ -12,7 +12,7 @@ if (!fs.existsSync(uploadsDir)) {
 // Set up storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, uploadsDir);
   },
   filename: (req, file, cb) => {
     // Sanitize filename to remove spaces

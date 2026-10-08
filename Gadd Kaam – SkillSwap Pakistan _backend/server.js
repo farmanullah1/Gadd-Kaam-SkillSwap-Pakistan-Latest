@@ -9,8 +9,9 @@ const socketIo = require('socket.io');
 
 const app = express();
 
-// Load env vars
-dotenv.config({ path: './config/.env' });
+// Load env vars reliably
+dotenv.config({ path: path.join(__dirname, '.env') });
+dotenv.config({ path: path.join(__dirname, 'config', '.env') });
 
 // Connect to Database
 connectDB();
@@ -21,7 +22,7 @@ const corsOptions = {
     optionsSuccessStatus: 200 
 };
 app.use(cors(corsOptions));
-app.use(express.json({ extended: false }));
+app.use(express.json());
 
 // Mount static directory for images
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
