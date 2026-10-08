@@ -119,6 +119,6 @@ Gadd Kaam features a modern, user-friendly interface designed to make skill disc
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
+## 📄 Licenses
 
 This project is licensed under the terms of the MIT license.
