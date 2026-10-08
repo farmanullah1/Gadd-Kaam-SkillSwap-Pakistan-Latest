@@ -9,11 +9,13 @@ import './index.css';
 
 // 2. Import core/guards (eagerly imported since they are lightweight or critical)
 import AdminRoute from './components/AdminRoute';
+import ProtectedRoute from './components/ProtectedRoute';
 import ChatbotModal from './components/ChatbotModal';
 import LoadingSpinner from './components/LoadingSpinner';
 import './i18n';
 
 // 3. Lazy loaded route components from pages/ directory
+const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'));
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
 const HomePage = React.lazy(() => import('./pages/HomePage'));
 const SignupPage = React.lazy(() => import('./pages/SignupPage'));
@@ -102,54 +104,57 @@ function App() {
         <React.Suspense fallback={<div className="suspense-loading-container"><LoadingSpinner /></div>}>
           <Routes>
             {/* Public routes */}
-            <Route exact path="/" element={<LandingPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/home" element={<HomePage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/signup" element={<SignupPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/login" element={<LoginPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/" element={<LandingPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/home" element={<HomePage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/signup" element={<SignupPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/login" element={<LoginPage onChatbotToggle={toggleChatbot} />} />
             
             {/* Content Pages */}
-            <Route exact path="/about-us" element={<AboutUsPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/about" element={<AboutUsPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/contact-us" element={<ContactUsPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/contact" element={<ContactUsPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/faq-page" element={<FAQPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/dispute-resolution-page" element={<DisputeResolutionPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/how-it-works" element={<HowItWorksPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/safety-tips" element={<SafetyTipsPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/success-stories" element={<SuccessStoriesPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/leaderboard" element={<CommunityLeaderboardPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/support" element={<HelpCenterPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/stories" element={<BarterStoriesPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/status" element={<PlatformStatusPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/careers" element={<CareersPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/blog" element={<BlogPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/partners" element={<PartnersPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/survey" element={<SurveyPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/responsive-layout" element={<ResponsiveLayoutPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/about-us" element={<AboutUsPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/about" element={<AboutUsPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/contact-us" element={<ContactUsPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/contact" element={<ContactUsPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/faq-page" element={<FAQPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/dispute-resolution-page" element={<DisputeResolutionPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/how-it-works" element={<HowItWorksPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/safety-tips" element={<SafetyTipsPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/success-stories" element={<SuccessStoriesPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/leaderboard" element={<CommunityLeaderboardPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/support" element={<HelpCenterPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/stories" element={<BarterStoriesPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/status" element={<PlatformStatusPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/careers" element={<CareersPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/blog" element={<BlogPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/partners" element={<PartnersPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/survey" element={<SurveyPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/responsive-layout" element={<ResponsiveLayoutPage onChatbotToggle={toggleChatbot} />} />
             
             {/* Legal Pages */}
-            <Route exact path="/privacy-policy" element={<PrivacyPolicyPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/terms-of-service" element={<TermsOfServicePage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/forgot-password" element={<LoginPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/terms-of-service" element={<TermsOfServicePage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/forgot-password" element={<LoginPage onChatbotToggle={toggleChatbot} />} />
 
             {/* Protected Dashboard Routes */}
-            <Route exact path="/dashboard" element={<DashboardPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/dashboard/profile" element={<ProfilePage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/dashboard/my-skills" element={<MySkillPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/offer-skill" element={<OfferSkillPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/marketplace" element={<MarketplacePage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/women-zone" element={<WomenOnlyZonePage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/dashboard/received-requests" element={<ReceivedRequestsPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/dashboard/messages" element={<MessagesPage onChatbotToggle={toggleChatbot} />} />
-            <Route exact path="/dashboard/reviews" element={<ReviewsPage onChatbotToggle={toggleChatbot} />} />
+            <Route path="/dashboard" element={<ProtectedRoute><DashboardPage onChatbotToggle={toggleChatbot} /></ProtectedRoute>} />
+            <Route path="/dashboard/profile" element={<ProtectedRoute><ProfilePage onChatbotToggle={toggleChatbot} /></ProtectedRoute>} />
+            <Route path="/dashboard/my-skills" element={<ProtectedRoute><MySkillPage onChatbotToggle={toggleChatbot} /></ProtectedRoute>} />
+            <Route path="/offer-skill" element={<ProtectedRoute><OfferSkillPage onChatbotToggle={toggleChatbot} /></ProtectedRoute>} />
+            <Route path="/marketplace" element={<ProtectedRoute><MarketplacePage onChatbotToggle={toggleChatbot} /></ProtectedRoute>} />
+            <Route path="/women-zone" element={<ProtectedRoute><WomenOnlyZonePage onChatbotToggle={toggleChatbot} /></ProtectedRoute>} />
+            <Route path="/dashboard/received-requests" element={<ProtectedRoute><ReceivedRequestsPage onChatbotToggle={toggleChatbot} /></ProtectedRoute>} />
+            <Route path="/dashboard/messages" element={<ProtectedRoute><MessagesPage onChatbotToggle={toggleChatbot} /></ProtectedRoute>} />
+            <Route path="/dashboard/reviews" element={<ProtectedRoute><ReviewsPage onChatbotToggle={toggleChatbot} /></ProtectedRoute>} />
 
             {/* Admin routes */}
-            <Route exact path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+            <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
               <Route index element={<AdminDashboard />} />
-              <Route exact path="users" element={<ManageUsers />} />
-              <Route exact path="skills" element={<ManageSkills />} />
-              <Route exact path="reports" element={<ManageReports />} />
+              <Route path="users" element={<ManageUsers />} />
+              <Route path="skills" element={<ManageSkills />} />
+              <Route path="reports" element={<ManageReports />} />
             </Route>
+
+            {/* 404 Catch-All Route */}
+            <Route path="*" element={<NotFoundPage onChatbotToggle={toggleChatbot} />} />
           </Routes>
         </React.Suspense>
 

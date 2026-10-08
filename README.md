@@ -12,22 +12,23 @@ A comprehensive skill-sharing platform designed for Pakistan, connecting individ
 ### 🛠️ Service Offerings
 - **Skill Listing:** Users can list skills they are willing to teach or offer as services.
 - **Category-Based Browsing:** Browse skills across multiple categories including Academics, Arts & Crafts, Home Services, Beauty & Fashion, and Health & Fitness.
-- **Skill Details:** Each skill listing includes a title, detailed description, and price (PKR).
+- **Skill Details:** Each skill listing includes a title, detailed description, remote availability, and skills wanted in return.
 
 ### 👥 Matching & Discovery
 - **Skill Matching Algorithm:** Intelligent system to match learners with suitable skill providers based on skills and location.
 - **Location-Based Search:** Find skills available in specific cities across Pakistan.
 - **Detailed View:** View complete details of any skill offering, including provider information and location.
 
-### 💳 Secure Payments
-- **Integrated Payment System:** Seamless and secure payment processing for skill-based transactions.
+### 🔄 Pure Barter Economy
+- **100% Cash-Free Trading:** Direct peer-to-peer barter of skills without monetary exchange.
 
 ### 💬 Communication
 - **Real-Time Chat:** Built-in messaging system to connect learners with skill providers.
-- **Notifications:** Instant notifications for new messages and updates.
+- **Notifications:** Instant notifications for new messages, swap requests, and updates.
 
 ### 🔐 Trust & Safety
-- **Comprehensive Verification:** Verification through CNIC and email address.
+- **Comprehensive Verification:** Verification through CNIC encryption and identity hashing.
+- **Women-Only Zone:** Dedicated, verified safe space for female swappers.
 - **Reporting System:** Easy-to-use reporting tool for users to flag inappropriate content or behavior.
 - **Moderation Dashboard:** Admin panel to review and manage user reports, ensuring a safe platform.
 
@@ -38,20 +39,21 @@ A comprehensive skill-sharing platform designed for Pakistan, connecting individ
 ## 🏗️ Tech Stack
 
 ### ⚙️ Backend
-- **Node.js:** Runtime environment for server-side JavaScript.
-- **Express.js:** Web framework for building APIs.
-- **MongoDB:** NoSQL database for data storage.
-- **JWT:** JSON Web Tokens for secure authentication.
+- **Node.js & Express.js:** Fast and scalable RESTful API with Socket.io real-time websockets.
+- **MongoDB & Mongoose:** Document database with field-level encryption for sensitive data.
+- **JWT:** Secure token-based authentication.
+- **Cohere AI:** AI-powered chatbot assistant.
 
 ### 💻 Frontend
-- **React.js:** JavaScript library for building user interfaces.
-- **HTML5 & CSS3:** Core web technologies for structure and styling.
+- **React.js (v19) & Vite:** Ultra-fast modern frontend development and bundling.
+- **Tailwind CSS (v4):** Next-generation utility styling and responsive design tokens.
+- **i18next:** Multi-language support (English, Urdu, Sindhi).
 
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed:
-- [Node.js](https://nodejs.org/) (v14 or higher)
-- [MongoDB](https://www.mongodb.com/) (Community Server)
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [MongoDB](https://www.mongodb.com/) (Community Server or MongoDB Atlas)
 
 ## 🏁 Getting Started
 
@@ -61,39 +63,51 @@ Follow these steps to set up and run the project locally.
 
 **Backend:**
 ```bash
-cd d:\Codes\Gadd Kaam – SkillSwap Pakistan\Gadd Kaam – SkillSwap Pakistan _backend
+cd "Gadd Kaam – SkillSwap Pakistan _backend"
 npm install
 ```
 
 **Frontend:**
 ```bash
-cd d:\Codes\Gadd Kaam – SkillSwap Pakistan\Gadd Kaam – SkillSwap Pakistan -frontend
+cd "Gadd Kaam – SkillSwap Pakistan -frontend"
 npm install
 ```
 
 ### 2. Configure Environment Variables
 
-Create a `.env` file in the backend directory (`Gadd Kaam – SkillSwap Pakistan _backend`) with the following credentials:
+**Backend:**
+Copy `.env.example` to `.env` in the backend directory (`Gadd Kaam – SkillSwap Pakistan _backend`):
 
 ```env
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/skillswap
+MONGO_URI=mongodb://localhost:27017/gadd_kaam
 JWT_SECRET=your_secret_key_here
+COHERE_API_KEY=your_cohere_api_key_here
+```
+
+**Frontend:**
+Copy `.env.example` to `.env` in the frontend directory (`Gadd Kaam – SkillSwap Pakistan -frontend`):
+
+```env
+REACT_APP_API_URL=http://localhost:5000
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 ### 3. Run the Application
 
 **Start Backend:**
 ```bash
+cd "Gadd Kaam – SkillSwap Pakistan _backend"
 npm run dev
 ```
 
 **Start Frontend:**
 ```bash
+cd "Gadd Kaam – SkillSwap Pakistan -frontend"
 npm start
 ```
 
-Both applications will start automatically. You can access the platform at:
+Both applications will be available at:
 - **Frontend:** http://localhost:3000
 - **Backend API:** http://localhost:5000
 
@@ -105,22 +119,13 @@ Gadd Kaam features a modern, user-friendly interface designed to make skill disc
 - **Mobile-First Approach:** Optimized for mobile users with a fully responsive design.
 - **Intuitive Navigation:** Easy-to-find menus, clear category organization, and logical user flows.
 - **Visual Hierarchy:** Clear emphasis on key actions like searching, browsing, and messaging.
-- **Accessibility:** High-contrast text, keyboard navigation support, and ARIA labels for screen readers.
+- **Accessibility:** High-contrast text, keyboard navigation support, and ARIA labels.
 - **Interactive Feedback:** Visual cues for form validation, loading states, and button interactions.
-
-### Design Elements:
-- **Navigation Bar:** Prominent navigation with links to Home, Marketplace, Women Zone, About Us, Contact, Helpline, and Dashboard.
-- **Search Functionality:** Advanced search with filters for categories, location, and pricing.
-- **Skill Cards:** Visually appealing cards displaying skill image, title, provider, and price.
-- **User Profiles:** Comprehensive profile pages with verified status, skill listings, and contact details.
-- **Modern Components:** Utilizes modern UI components like modals, date pickers, and interactive maps.
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 Licenses
+## 📄 License
 
 This project is licensed under the terms of the MIT license.
-
-is any issue
